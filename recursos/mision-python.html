@@ -1,43 +1,64 @@
-<!doctype html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="es" class="dark h-full">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Misión Python: Ingeniería en código</title>
-<style>
-:root{--bg:#f6f7fb;--card:#fff;--ink:#1d2433;--mut:#5b6478;--acc:#3b5bdb;--ok:#2b8a3e;--bad:#c92a2a;--line:#dfe3ee;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#11141c;--card:#1a1f2b;--ink:#e8ebf3;--mut:#9aa3b8;--acc:#7c9cff;--ok:#51cf66;--bad:#ff6b6b;--line:#2c3446;color-scheme:dark}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
-main{max-width:720px;margin:0 auto;padding:24px 16px 48px}
-h1{font-size:1.6rem;margin:.2em 0}h2{font-size:1.25rem;margin:.4em 0 .5em}
-h3{font-size:.85rem;color:var(--acc);margin:.2em 0 .6em;text-transform:uppercase;letter-spacing:.05em}
-p{margin:.5em 0}ul{padding-left:20px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;display:block}
-button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:10px 14px;text-align:left;white-space:pre-wrap;width:auto}
-button:hover:not(:disabled){border-color:var(--acc)}
-button:disabled{cursor:default;opacity:.8}
-button.card{width:100%;display:block;margin:14px 0;padding:18px;border-radius:14px}
-button.pri{background:var(--acc);color:#fff;border-color:var(--acc);text-align:center;font-weight:600;width:100%;margin-top:10px}
-button.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 16%,var(--card))}
-button.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--card))}
-.opts{display:grid;gap:8px}
-pre{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px;overflow-x:auto;font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;margin:10px 0;white-space:pre}
-.fb{margin-top:10px;padding:10px 12px;border-radius:10px;font-size:.95rem}
-.fb.ok{background:color-mix(in srgb,var(--ok) 15%,transparent)}
-.fb.bad{background:color-mix(in srgb,var(--bad) 12%,transparent)}
-.bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin:12px 0}
-.bar i{display:block;height:100%;background:var(--acc);transition:width .4s}
-.badge{display:inline-block;background:color-mix(in srgb,var(--acc) 15%,transparent);color:var(--acc);border-radius:99px;padding:4px 12px;font-weight:600;font-size:.9rem;margin:4px}
-.muted{color:var(--mut);font-size:.92rem}
-.hero{text-align:center;padding:16px 8px}
-.row{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--line)}
-select,input[type=text]{font:inherit;padding:9px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);width:100%}
-select{width:auto}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misión Python: Ingeniería en código - PyEngine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['Fira Code', 'monospace'] } } }
+        }
+    </script>
+    <style>
+        body { background-color: #080C14; color: #F8FAFC; font-family: 'Inter', sans-serif; }
+        .code-font { font-family: 'Fira Code', monospace; }
+        .cyber-card { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(16px); border: 1px solid #1E293B; box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.8); }
+        .cyber-card-glow { border-color: #06B6D4; box-shadow: 0 0 30px rgba(6, 182, 212, 0.3); }
+        .speech-bubble { position: relative; background: #1E293B; border: 2px solid #06B6D4; border-radius: 1rem; }
+        .speech-bubble::after { content: ''; position: absolute; left: -14px; top: 24px; border-width: 8px 14px 8px 0; border-style: solid; border-color: transparent #06B6D4 transparent transparent; display: block; width: 0; }
+        @media (max-width: 767px) { .speech-bubble::after { display: none; } }
+        @keyframes pybot-float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+        .animate-pybot { animation: pybot-float 3.5s ease-in-out infinite; }
+        @keyframes pop-in { 0% { transform: scale(.4) rotate(-12deg); opacity: 0; } 70% { transform: scale(1.12) rotate(3deg); opacity: 1; } 100% { transform: scale(1) rotate(0); } }
+        .animate-pop { animation: pop-in .7s ease-out both; }
+        @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+        .animate-shake { animation: shake .3s ease-in-out; }
+        .screen { position: fixed; inset: 0; overflow-y: auto; z-index: 10; }
+        .screen > .wrap { min-height: 100%; display: flex; align-items: center; justify-content: center; padding: 5rem 1.5rem 1.5rem; }
+        pre.code { background: #0B1220; border: 1px solid #164E63; border-radius: .5rem; padding: .75rem; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: .8rem; line-height: 1.5; color: #67E8F9; white-space: pre; }
+        .opt { white-space: pre-wrap; }
+        select.sel, input.txt { background: #0F172A; border: 1px solid #334155; border-radius: .5rem; color: #67E8F9; font-family: 'Fira Code', monospace; font-size: .8rem; padding: .5rem .7rem; }
+        select.sel { max-width: 60%; }
+        input.txt { width: 100%; }
+    </style>
 </head>
-<body>
-<main id="app"></main>
+<body class="selection:bg-cyan-500 selection:text-black">
+
+    <header class="fixed top-0 left-0 w-full z-40 bg-slate-950/80 backdrop-blur-md border-b border-slate-800 px-6 py-3 flex justify-between items-center">
+        <a href="../index.html" class="flex items-center space-x-3">
+            <div class="bg-gradient-to-tr from-cyan-500 to-emerald-500 p-2 rounded-xl text-black font-extrabold text-lg flex items-center justify-center w-9 h-9">
+                <i class="fa-solid fa-microchip text-slate-950"></i>
+            </div>
+            <h1 class="font-extrabold text-base bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
+                PyEngine <span class="text-[10px] px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 font-mono">PyBot Edition</span>
+            </h1>
+        </a>
+        <div class="flex items-center gap-2">
+            <button onclick="go('map')" class="text-xs bg-slate-900 hover:bg-slate-800 text-cyan-300 px-3 py-1.5 rounded-lg border border-cyan-800 font-mono transition-all flex items-center gap-2">
+                <i class="fa-solid fa-map"></i> <span class="hidden sm:inline">Mapa de la misión</span>
+            </button>
+            <a href="../index.html" class="text-xs bg-slate-900 hover:bg-slate-800 text-cyan-300 px-3 py-1.5 rounded-lg border border-cyan-800 font-mono transition-all flex items-center gap-2">
+                <i class="fa-solid fa-house"></i> <span class="hidden sm:inline">Inicio</span>
+            </a>
+        </div>
+    </header>
+
+    <div id="screen" class="screen"><div class="wrap" id="app"></div></div>
+
 <script>
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
@@ -145,167 +166,302 @@ const FIN = {
       ok:"¡Verificación completada! Has probado el programa con dos valores distintos y comprobado que la condición permite obtener resultados diferentes según la entrada.", bad:"¿Es 20 mayor o igual que 30? Si no lo es, ¿qué bloque se ejecuta?" }
   ] };
 
-let S = { v:"intro", L:0, ok:{}, fb:{}, sel:{}, ord:{} };
+
+/* ===================== ESTADO ===================== */
+const KEY = "pyengine-mision-v1";
+const COL = ["#06B6D4", "#A855F7", "#10B981", "#F59E0B"];
+let S = { v:"intro", L:0, i:0, ok:{}, wr:{}, fb:{}, sel:{}, ord:{}, fi:{} };
+
+try { const saved = JSON.parse(localStorage.getItem(KEY) || "null"); if (saved && saved.ok) S.ok = saved.ok; } catch(e) {}
+function save(){ try { localStorage.setItem(KEY, JSON.stringify({ ok: S.ok })); } catch(e) {} }
 
 function getR(k){ const [li,ri]=k.split("."); const L = li==="4" ? FIN : LV[+li]; return L.retos[+ri]; }
 function ld(li){
   const L = li===4 ? FIN : LV[li];
-  const quizzesDone = L.retos.every((_,i)=>S.ok[li+"."+i]);
-  const actDone = li===4 || !L.act || S.ok[li+".act"];
-  return quizzesDone && actDone;
+  const q = L.retos.every((_,i)=>S.ok[li+"."+i]);
+  return q && (li===4 || !L.act || !!S.ok[li+".act"]);
 }
-function go(v,L){ S.v=v; if(L!==undefined) S.L=L; render(); }
+function steps(li){
+  const L = li===4 ? FIN : LV[li];
+  const s = [{t:"story"}];
+  L.retos.forEach((_,r)=>s.push({t:"q", k:li+"."+r}));
+  if (li<4 && L.act) s.push({t:"act"});
+  if (li<4) s.push({t:"badge"});
+  return s;
+}
+function stepDone(li, st){
+  if (st.t==="story" || st.t==="badge") return true;
+  if (st.t==="q") return !!S.ok[st.k];
+  return !!S.ok[li+".act"];
+}
+
+/* ===================== NAVEGACIÓN ===================== */
+function go(v, L){
+  S.v = v;
+  if (L !== undefined) { S.L = L; S.i = 0; }
+  render();
+}
+function next(){
+  const s = steps(S.L);
+  if (!stepDone(S.L, s[S.i])) return;
+  if (S.i < s.length - 1) { S.i++; render(); }
+  else go(S.L === 4 ? "win" : "map");
+}
+function prev(){ if (S.i > 0) { S.i--; render(); } }
 function render(){
-  const f={intro,map,lvl:()=>lvl(S.L),fin,win}[S.v];
+  const f = { intro, map, step, win }[S.v];
   document.getElementById("app").innerHTML = f();
-  window.scrollTo(0,0);
+  document.getElementById("screen").scrollTop = 0;
 }
 
-function pick(k,i){
-  if(S.ok[k]) return;
-  const r=getR(k), good = i===r.a;
-  S.fb[k]={i,good};
-  if(good) S.ok[k]=true;
-  render();
+/* ===================== PIEZAS VISUALES ===================== */
+function pybot(size, mood){
+  const arms = `<path d="M 20 50 Q 12 55 18 65" fill="none" stroke="#06B6D4" stroke-width="3" stroke-linecap="round"/><path d="M 80 50 Q 88 55 82 65" fill="none" stroke="#06B6D4" stroke-width="3" stroke-linecap="round"/>`;
+  return `<div class="${size} relative animate-pybot"><svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-[0_0_20px_rgba(6,182,212,0.8)]">
+    <rect x="25" y="40" width="50" height="40" rx="10" fill="#0F172A" stroke="#06B6D4" stroke-width="3"/>
+    <rect x="32" y="47" width="36" height="24" rx="5" fill="#080C14" stroke="#10B981" stroke-width="2"/>
+    <circle cx="42" cy="59" r="3.5" fill="#06B6D4" class="animate-pulse"/><circle cx="58" cy="59" r="3.5" fill="#06B6D4" class="animate-pulse"/>
+    <line x1="50" y1="40" x2="50" y2="25" stroke="#06B6D4" stroke-width="3"/><circle cx="50" cy="22" r="4" fill="#F59E0B" class="animate-ping"/>${arms}</svg></div>`;
 }
-function qz(k){
-  const r=getR(k), st=S.fb[k], done=!!S.ok[k];
-  let h=`<div class="card"><h3>${esc(r.h)}</h3><p>${esc(r.q)}</p>`;
-  if(r.c) h+=`<pre>${esc(r.c)}</pre>`;
-  h+=`<div class="opts">`;
-  r.o.forEach((t,i)=>{
-    let c="";
-    if(done && i===r.a) c="right";
-    else if(st && st.i===i) c = st.good ? "right" : "wrong";
-    h+=`<button class="${c}" ${done?"disabled":""} onclick="pick('${k}',${i})">${esc(t)}</button>`;
-  });
-  h+=`</div>`;
-  if(st) h+=`<div class="fb ${st.good?"ok":"bad"}">${esc(st.good?r.ok:r.bad)}</div>`;
-  if(done && r.x) h+=`<pre>${esc(r.x)}</pre>`;
-  return h+`</div>`;
+function star(cx, cy, R, r){
+  let p = [];
+  for (let n = 0; n < 10; n++) { const a = -Math.PI/2 + n*Math.PI/5, d = n%2 ? r : R; p.push((cx + d*Math.cos(a)).toFixed(1) + "," + (cy + d*Math.sin(a)).toFixed(1)); }
+  return p.join(" ");
 }
-
-function mt2(li,ri,v){
-  const k=li+".act", A=LV[li].act;
-  if(S.ok[k]) return;
-  S.sel[k]=S.sel[k]||[];
-  S.sel[k][ri] = v==="" ? undefined : +v;
-  const sel=S.sel[k];
-  const all = A.rows.every((_,j)=>sel[j]!==undefined);
-  delete S.fb[k];
-  if(all){
-    const good = A.rows.every((row,j)=>sel[j]===row[1]);
-    S.fb[k]={good,msg:good?A.ok:A.bad};
-    if(good) S.ok[k]=true;
-  }
-  render();
+function medal(li, cls, locked){
+  const c = locked ? "#475569" : COL[li];
+  return `<svg viewBox="0 0 100 125" class="${cls}" style="${locked?"opacity:.45":`filter:drop-shadow(0 0 12px ${c}99)`}">
+    <polygon points="28,0 50,0 60,42 40,52" fill="${c}" opacity=".75"/><polygon points="72,0 50,0 40,42 60,52" fill="${c}"/>
+    <circle cx="50" cy="80" r="35" fill="#0F172A" stroke="${c}" stroke-width="5"/>
+    <circle cx="50" cy="80" r="27" fill="none" stroke="${c}" stroke-width="1.5" stroke-dasharray="3 3" opacity=".7"/>
+    ${locked ? `<text x="50" y="90" text-anchor="middle" font-size="26" fill="${c}">🔒</text>` : `<polygon points="${star(50,80,19,8)}" fill="${c}"/>`}
+  </svg>`;
 }
-function mt(li){
-  const k=li+".act", A=LV[li].act, sel=S.sel[k]||[], st=S.fb[k], done=!!S.ok[k];
-  let h=`<div class="card"><h3>Actividad práctica: clasifica los datos</h3><p class="muted">Relaciona cada dato con su tipo correcto.</p>`;
-  A.rows.forEach((row,ri)=>{
-    h+=`<div class="row"><code>${esc(row[0])}</code><select ${done?"disabled":""} onchange="mt2(${li},${ri},this.value)"><option value="">Elige…</option>${A.opts.map((o,j)=>`<option value="${j}" ${sel[ri]===j?"selected":""}>${esc(o)}</option>`).join("")}</select></div>`;
-  });
-  if(st) h+=`<div class="fb ${st.good?"ok":"bad"}">${esc(st.msg)}</div>`;
-  return h+`</div>`;
+function trophy(cls){
+  return `<svg viewBox="0 0 100 100" class="${cls}" style="filter:drop-shadow(0 0 16px #F59E0Bbb)">
+    <path d="M30 12 h40 v28 a20 20 0 0 1 -40 0 z" fill="#F59E0B" stroke="#FDE68A" stroke-width="2"/>
+    <path d="M30 20 h-12 v6 a14 14 0 0 0 14 14" fill="none" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/>
+    <path d="M70 20 h12 v6 a14 14 0 0 1 -14 14" fill="none" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/>
+    <rect x="45" y="60" width="10" height="16" fill="#D97706"/><rect x="32" y="76" width="36" height="9" rx="3" fill="#F59E0B" stroke="#FDE68A" stroke-width="2"/>
+    <polygon points="${star(50,34,11,4.8)}" fill="#FEF3C7"/>
+  </svg>`;
+}
+function bar(done, total){
+  return `<div class="h-2 bg-slate-800 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-cyan-500 to-emerald-500 transition-all duration-500" style="width:${total?done/total*100:0}%"></div></div>`;
+}
+function fbBox(good, msg){
+  return good
+    ? `<div class="text-xs p-3 rounded-xl border bg-emerald-950/65 border-emerald-500/60 text-emerald-200"><i class="fa-solid fa-circle-check text-emerald-400"></i> <strong>¡Correcto!</strong> ${esc(msg)}</div>`
+    : `<div class="text-xs p-3 rounded-xl border bg-red-950/65 border-red-500/60 text-red-200 animate-shake"><i class="fa-solid fa-circle-xmark text-red-400"></i> <strong>Todavía no.</strong> ${esc(msg)}</div>`;
 }
 
-function oc(li,j){
-  const k=li+".act", A=LV[li].act;
-  if(S.ok[k]) return;
-  const ord=(S.ord[k]=S.ord[k]||[]);
-  if(ord.includes(j)) return;
-  ord.push(j);
-  if(ord.length===A.items.length){
-    const good = ord.every((v,n)=>v===n);
-    if(good){ S.ok[k]=true; S.fb[k]={good:true,msg:A.ok}; }
-    else { S.fb[k]={good:false,msg:"El orden no es correcto. Revisa qué debe pasar primero y vuelve a intentarlo."}; S.ord[k]=[]; }
-  }
-  render();
-}
-function orr(li){ const k=li+".act"; if(S.ok[k]) return; S.ord[k]=[]; delete S.fb[k]; render(); }
-function od(li){
-  const k=li+".act", A=LV[li].act, ord=S.ord[k]||[], st=S.fb[k], done=!!S.ok[k];
-  let h=`<div class="card"><h3>Actividad práctica: arma la secuencia</h3><p class="muted">Toca los pasos en el orden en que deben ejecutarse.</p>`;
-  h+=`<p><strong>Tu secuencia:</strong><br>${ord.length? ord.map((j,n)=>`${n+1}. ${esc(A.items[j])}`).join("<br>") : "—"}</p><div class="opts">`;
-  A.show.forEach(j=>{ h+=`<button ${done||ord.includes(j)?"disabled":""} onclick="oc(${li},${j})">${esc(A.items[j])}</button>`; });
-  h+=`</div>`;
-  if(!done) h+=`<button onclick="orr(${li})" style="margin-top:8px">Reiniciar</button>`;
-  if(st) h+=`<div class="fb ${st.good?"ok":"bad"}">${esc(st.msg)}</div>`;
-  return h+`</div>`;
-}
-
-function fc(li){
-  const k=li+".act", A=LV[li].act;
-  const v=(document.getElementById("fi").value||"").replace(/\s/g,"");
-  const good = v===A.ans.replace(/\s/g,"");
-  S.fb[k]={good,msg:good?A.ok:A.bad};
-  if(good) S.ok[k]=true;
-  render();
-}
-function fl(li){
-  const k=li+".act", A=LV[li].act, st=S.fb[k], done=!!S.ok[k];
-  let h=`<div class="card"><h3>Actividad práctica: completa el programa</h3><p>Escribe la condición que falta:</p><pre>${esc(A.c)}</pre>`;
-  h+=`<input type="text" id="fi" placeholder="Escribe la condición" ${done?"disabled":""} value="${done?esc(A.ans):""}">`;
-  h+=`<button class="pri" ${done?"disabled":""} onclick="fc(${li})">Comprobar</button>`;
-  if(st) h+=`<div class="fb ${st.good?"ok":"bad"}">${esc(st.msg)}</div>`;
-  return h+`</div>`;
+/* ===================== PANTALLAS ===================== */
+function intro(){
+  return `<div class="cyber-card cyber-card-glow max-w-3xl w-full p-6 sm:p-8 rounded-2xl space-y-6 text-center border border-cyan-500/50">
+    <div class="flex justify-center">${pybot("w-32 h-32")}</div>
+    <div class="space-y-2">
+      <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest bg-cyan-950/80 px-3 py-1 rounded-full border border-cyan-800">Recurso de gamificación</span>
+      <h2 class="text-2xl font-bold text-white">MISIÓN PYTHON: Ingeniería en código</h2>
+      <p class="text-slate-400 text-xs">Una misión. Cuatro niveles. Un sistema que necesita tu ayuda.</p>
+    </div>
+    <div class="speech-bubble p-5 text-left text-xs text-slate-200 leading-relaxed space-y-3">
+      <p>El Centro de Sistemas de Ingeniería ha sufrido una falla. Los datos no se procesan correctamente y el sistema no puede completar sus tareas.</p>
+      <p>Como integrante del equipo de recuperación, superarás cuatro niveles: analizar problemas, diseñar algoritmos, programar en Python y encontrar errores.</p>
+      <p class="text-cyan-300 font-mono"><i class="fa-solid fa-gamepad"></i> Cada reto es una pantalla. Respóndelo bien para avanzar; si fallas, PyBot te da una pista y puedes intentarlo otra vez. Cada nivel completado te da una medalla, y al final recibirás el trofeo.</p>
+    </div>
+    <button onclick="go('map')" class="w-full py-4 bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-bold rounded-xl text-sm transition-all shadow-lg hover:opacity-90 flex items-center justify-center gap-2 font-mono">
+      <i class="fa-solid fa-rocket"></i> INICIAR MISIÓN
+    </button>
+  </div>`;
 }
 
 function map(){
-  const done = [0,1,2,3].filter(i=>ld(i)).length;
-  let h=`<h1>Mapa de la misión</h1><div class="bar"><i style="width:${done/4*100}%"></i></div><p class="muted">${done} de 4 niveles completados</p>`;
+  const done = [0,1,2,3].filter(ld).length;
+  const th = [["cyan","text-cyan-400","bg-cyan-950"],["purple","text-purple-400","bg-purple-950"],["emerald","text-emerald-400","bg-emerald-950"],["amber","text-amber-400","bg-amber-950"]];
+  let h = `<div class="max-w-5xl w-full space-y-6 text-center">
+    <div class="flex items-center justify-center gap-4">${pybot("w-16 h-16")}
+      <div class="text-left"><h2 class="text-3xl font-extrabold text-white">Mapa de la misión</h2>
+      <p class="text-slate-400 text-xs">${done} de 4 niveles completados · avanza en orden para desbloquear el siguiente</p></div></div>
+    <div class="max-w-md mx-auto">${bar(done,4)}</div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 text-left">`;
   LV.forEach((L,i)=>{
-    const un = i===0 || ld(i-1), dn = ld(i);
-    h+=`<button class="card" ${un?"":"disabled"} onclick="go('lvl',${i})"><strong>${esc(L.n)}</strong><br><span class="muted">${esc(L.m)} ${dn?"· ✔ "+esc(L.b):un?"":"· 🔒 Bloqueado"}</span></button>`;
+    const un = i===0 || ld(i-1), dn = ld(i), [c,tx,bg] = th[i];
+    h += `<button ${un?"":"disabled"} onclick="go('step',${i})" class="cyber-card p-5 rounded-2xl ${un?`hover:border-${c}-400 cursor-pointer hover:scale-[1.02]`:"opacity-60 cursor-not-allowed"} transition-all flex items-center gap-4 border border-slate-800 text-left group">
+      <div class="w-16 flex-shrink-0">${medal(i,"w-full",!dn)}</div>
+      <div class="space-y-1">
+        <span class="text-[11px] font-mono ${tx}">${esc(L.m)}</span>
+        <h3 class="text-sm font-bold text-white">${esc(L.n)}</h3>
+        <p class="text-[11px] text-slate-400">${esc(L.t)}</p>
+        <p class="text-[11px] font-mono ${dn?"text-emerald-400":un?"text-slate-300":"text-slate-500"}">${dn?"✔ "+esc(L.b):un?"▶ Disponible":"🔒 Bloqueado"}</p>
+      </div></button>`;
   });
   const fin = done===4;
-  h+=`<button class="card" ${fin?"":"disabled"} onclick="go('fin')"><strong>${esc(FIN.n)}</strong><br><span class="muted">${fin?"Disponible":"🔒 Completa los cuatro niveles"}</span></button>`;
-  return h+`<button onclick="location.href='../index.html'">← Volver</button>`;
+  h += `</div>
+    <button ${fin?"":"disabled"} onclick="go('step',4)" class="cyber-card p-5 rounded-2xl w-full max-w-3xl mx-auto ${fin?"hover:border-amber-400 cursor-pointer hover:scale-[1.01]":"opacity-60 cursor-not-allowed"} transition-all flex items-center gap-4 border border-slate-800 text-left">
+      <div class="w-14 flex-shrink-0 ${fin?"":"opacity-40 grayscale"}">${trophy("w-full")}</div>
+      <div><h3 class="text-sm font-bold text-white">${esc(FIN.n)}</h3>
+      <p class="text-[11px] font-mono ${fin?"text-amber-300":"text-slate-500"}">${fin?"▶ Disponible: consigue el trofeo":"🔒 Completa los cuatro niveles"}</p></div></button>
+    <div class="flex justify-center gap-3">
+      <button onclick="go('intro')" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-mono rounded-lg border border-slate-700"><i class="fa-solid fa-chevron-left"></i> Introducción</button>
+      <a href="../index.html" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-mono rounded-lg border border-slate-700">Volver al inicio</a>
+    </div></div>`;
+  return h;
 }
 
-function intro(){
-  return `<div class="hero"><p class="muted">Recurso de gamificación</p><h1>MISIÓN PYTHON</h1><p><strong>Ingeniería en código</strong></p><p class="muted">Una misión. Cuatro niveles. Un sistema que necesita tu ayuda.</p></div>
-  <div class="card"><p>El Centro de Sistemas de Ingeniería ha sufrido una falla. Los datos no se procesan correctamente, las decisiones automáticas están fallando y el sistema no puede completar sus tareas.</p>
-  <p>Como integrante del equipo de recuperación, deberás superar cuatro niveles para restaurar su funcionamiento. Analiza problemas, diseña algoritmos, programa en Python y encuentra errores.</p>
-  <p>Cada decisión te acercará a completar la misión. ¿Estás listo para demostrar tus habilidades?</p></div>
-  <div class="card"><h3>¿Cómo jugar?</h3><ul>
-    <li>Avanza por los niveles en el orden establecido.</li><li>Lee la situación antes de responder cada reto.</li>
-    <li>Selecciona una respuesta o completa la actividad según las instrucciones.</li><li>Lee la retroalimentación para comprender tus aciertos y corregir tus errores.</li>
-    <li>Completa el desafío final para restaurar el sistema.</li></ul>
-    <h3>Reglas del juego</h3><ul>
-    <li>Cada nivel representa una etapa de solución de un problema.</li><li>Puedes volver a intentar las preguntas si te equivocas.</li>
-    <li>No se trata sólo de acertar: debes comprender por qué una solución funciona.</li><li>Obtendrás una insignia simbólica al completar cada etapa.</li></ul>
-    <p class="muted"><strong>Objetivo de aprendizaje:</strong> aplicar los fundamentos de programación para analizar problemas, construir algoritmos, interpretar código Python y verificar soluciones.</p></div>
-  <button class="pri" onclick="go('map')">INICIAR MISIÓN</button>
-  <button onclick="location.href='../index.html'" style="margin-top:8px">← Volver</button>`;
+/* --- contenido de cada tipo de pantalla --- */
+function bodyStory(li){
+  const L = li===4 ? FIN : LV[li];
+  if (li===4) return `<p class="text-sm font-semibold text-white">${esc(L.n)}</p><p class="text-xs text-slate-200 leading-relaxed">${esc(L.i)}</p>
+    <p class="text-xs text-cyan-300">${esc(L.s)}</p><pre class="code">${esc(L.c)}</pre>`;
+  return `<p class="text-[11px] font-mono text-cyan-400 uppercase">Nivel ${li+1} de 4 · ${esc(L.m)}</p>
+    <p class="text-sm font-semibold text-white">${esc(L.n.split(": ")[1])} <span class="text-slate-400 font-normal">· ${esc(L.t)}</span></p>
+    <p class="text-xs text-slate-200 leading-relaxed">${esc(L.i)}</p>
+    <div class="bg-slate-900 p-3 rounded border border-cyan-800 text-xs text-slate-300 space-y-2"><p class="font-mono text-cyan-300 text-[11px]">📖 HISTORIA DEL NIVEL</p>${L.st.map(p=>`<p>${esc(p)}</p>`).join("")}</div>`;
+}
+function bodyQ(k){
+  const r = getR(k), done = !!S.ok[k], wr = S.wr[k] || [];
+  let h = `<p class="text-[11px] font-mono text-yellow-400">${esc(r.h)}</p><p class="text-sm font-semibold text-white">${esc(r.q)}</p>`;
+  if (r.c) h += `<pre class="code">${esc(r.c)}</pre>`;
+  h += `<div class="space-y-2 pt-1">`;
+  r.o.forEach((t,i)=>{
+    let cls = "bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-300", dis = "";
+    if (done && i===r.a) { cls = "bg-emerald-950/70 border-emerald-500 text-emerald-200"; dis = "disabled"; }
+    else if (wr.includes(i)) { cls = "bg-red-950/60 border-red-500/70 text-red-300 line-through opacity-70"; dis = "disabled"; }
+    else if (done) { dis = "disabled"; cls += " opacity-50"; }
+    h += `<button ${dis} onclick="pick('${k}',${i})" class="opt w-full text-left p-2.5 rounded-lg border text-xs font-mono transition-all ${cls}">${String.fromCharCode(65+i)}) ${esc(t)}</button>`;
+  });
+  h += `</div>`;
+  if (done && r.x) h += `<pre class="code">${esc(r.x)}</pre>`;
+  return h;
+}
+function bodyAct(li){
+  const A = LV[li].act, k = li+".act", done = !!S.ok[k];
+  if (A.t==="match") {
+    const sel = done ? A.rows.map(r=>r[1]) : (S.sel[k] || []);
+    let h = `<p class="text-[11px] font-mono text-yellow-400">Actividad práctica · clasifica los datos</p><p class="text-sm font-semibold text-white">Relaciona cada dato con su tipo correcto.</p><div class="space-y-2 pt-1">`;
+    A.rows.forEach((row,ri)=>{
+      h += `<div class="flex items-center justify-between gap-3 bg-slate-900 border border-slate-800 rounded-lg p-2.5"><code class="text-cyan-300 text-xs">${esc(row[0])}</code>
+        <select class="sel" ${done?"disabled":""} onchange="mt2(${li},${ri},this.value)"><option value="">Elige…</option>${A.opts.map((o,j)=>`<option value="${j}" ${sel[ri]===j?"selected":""}>${esc(o)}</option>`).join("")}</select></div>`;
+    });
+    return h + `</div>`;
+  }
+  if (A.t==="order") {
+    const ord = done ? A.items.map((_,j)=>j) : (S.ord[k] || []);
+    let h = `<p class="text-[11px] font-mono text-yellow-400">Actividad práctica · arma la secuencia</p><p class="text-sm font-semibold text-white">Toca los pasos en el orden en que deben ejecutarse.</p>
+      <div class="bg-slate-900 p-3 rounded border border-cyan-800 text-xs text-cyan-200 space-y-1"><p class="font-mono text-[11px] text-cyan-400">TU SECUENCIA</p>${ord.length ? ord.map((j,n)=>`<p>${n+1}. ${esc(A.items[j])}</p>`).join("") : '<p class="text-slate-500">—</p>'}</div><div class="space-y-2">`;
+    A.show.forEach(j=>{ const used = ord.includes(j);
+      h += `<button ${done||used?"disabled":""} onclick="oc(${li},${j})" class="opt w-full text-left p-2.5 rounded-lg border text-xs font-mono transition-all ${used?"bg-slate-950 border-slate-900 text-slate-600":"bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-300"}">${esc(A.items[j])}</button>`; });
+    h += `</div>`;
+    if (!done) h += `<button onclick="orr(${li})" class="px-3 py-1.5 bg-slate-900 text-slate-400 text-xs font-mono rounded-lg border border-slate-700"><i class="fa-solid fa-rotate-left"></i> Reiniciar</button>`;
+    return h;
+  }
+  const val = done ? A.ans : (S.fi[k] || "");
+  return `<p class="text-[11px] font-mono text-yellow-400">Actividad práctica · completa el programa</p><p class="text-sm font-semibold text-white">Escribe la condición que falta:</p>
+    <pre class="code">${esc(A.c)}</pre>
+    <input type="text" id="fi" class="txt" placeholder="Escribe la condición…" ${done?"disabled":""} value="${esc(val)}" onkeydown="if(event.key==='Enter')fc(${li})">
+    ${done?"":`<button onclick="fc(${li})" class="px-4 py-2 bg-cyan-500 text-black font-bold text-xs font-mono rounded-lg">Verificar Respuesta</button>`}`;
+}
+function bodyBadge(li){
+  const L = LV[li];
+  return `<div class="text-center space-y-3"><p class="text-[11px] font-mono text-emerald-400 uppercase">¡Nivel ${li+1} completado!</p>
+    <div class="flex justify-center"><div class="w-32 animate-pop">${medal(li,"w-full",false)}</div></div>
+    <p class="text-lg font-extrabold text-white">Medalla: ${esc(L.b)}</p>
+    <p class="text-xs text-slate-300">Superaste todos los retos de «${esc(L.n.split(": ")[1])}».</p></div>`;
 }
 
-function lvl(li){
-  const L=LV[li];
-  let h=`<p class="muted">Nivel ${li+1} de 4 · ${esc(L.m)}</p><h2>${esc(L.n.split(": ")[1])}</h2><p class="muted">${esc(L.t)}</p><p>${esc(L.i)}</p>
-  <div class="card"><h3>Historia del nivel</h3>${L.st.map(p=>`<p>${esc(p)}</p>`).join("")}</div>`;
-  h+=L.retos.map((_,r)=>qz(li+"."+r)).join("");
-  if(L.act) h+= L.act.t==="match" ? mt(li) : L.act.t==="order" ? od(li) : fl(li);
-  if(ld(li)) h+=`<div class="card"><span class="badge">🏅 ${esc(L.b)}</span><p>¡Nivel completado! Has obtenido la insignia.</p></div>`;
-  return h+`<button class="pri" onclick="go('map')">Volver al mapa</button>`;
-}
-
-function fin(){
-  const done = FIN.retos.every((_,i)=>S.ok["4."+i]);
-  let h=`<p class="muted">Desafío final</p><h2>El sistema necesita una última comprobación</h2><p>${esc(FIN.i)}</p>
-  <div class="card"><h3>Situación</h3><p>${esc(FIN.s)}</p><pre>${esc(FIN.c)}</pre></div>`;
-  h+=FIN.retos.map((_,i)=>qz("4."+i)).join("");
-  if(done) h+=`<button class="pri" onclick="go('win')">Ver mensaje de victoria</button>`;
-  return h+`<button onclick="go('map')" style="margin-top:8px">← Mapa</button>`;
+function step(){
+  const li = S.L, s = steps(li), st = s[S.i], L = li===4 ? FIN : LV[li];
+  const done = stepDone(li, st), last = S.i === s.length-1;
+  const fbk = st.t==="q" ? st.k : li+".act";
+  const f = S.fb[fbk];
+  const isStory = st.t==="story", isBadge = st.t==="badge";
+  const body = isStory ? bodyStory(li) : st.t==="q" ? bodyQ(st.k) : st.t==="act" ? bodyAct(li) : bodyBadge(li);
+  const label = li===4 ? "Desafío final" : `Nivel ${li+1} · ${L.n.split(": ")[1]}`;
+  const status = isStory ? "Lee la historia" : isBadge ? "¡Misión de nivel cumplida!" : done ? "¡Bien hecho! Avanza." : f && !f.good ? "Revisa la pista e inténtalo otra vez" : "Analizando tu respuesta...";
+  const nextTxt = last ? (li===4 ? 'Ver el trofeo <i class="fa-solid fa-trophy"></i>' : 'Volver al mapa <i class="fa-solid fa-map"></i>') : isStory ? 'Comenzar <i class="fa-solid fa-chevron-right"></i>' : 'Siguiente <i class="fa-solid fa-chevron-right"></i>';
+  return `<div class="max-w-4xl w-full cyber-card p-5 sm:p-6 rounded-2xl space-y-4 border border-cyan-500/50">
+    <div class="flex justify-between items-center gap-2 border-b border-slate-800 pb-3 flex-wrap">
+      <span class="text-xs font-mono text-yellow-400 bg-yellow-950/80 px-3 py-1 rounded border border-yellow-800">Pantalla ${S.i+1} de ${s.length}</span>
+      <span class="text-xs font-mono text-cyan-300 bg-cyan-950 px-3 py-1 rounded border border-cyan-800">${esc(label)}</span>
+    </div>
+    ${bar(S.i + (done?1:0), s.length)}
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-center bg-slate-950/90 p-4 sm:p-5 rounded-2xl border border-cyan-500/30">
+      <div class="md:col-span-4 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-slate-800 pb-3 md:pb-0 md:pr-4">
+        ${pybot("w-24 h-24 md:w-36 md:h-36")}
+        <span class="text-xs font-mono font-bold text-cyan-400 mt-2">PyBot Tutor</span>
+        <span class="text-[10px] text-slate-400 text-center">${status}</span>
+      </div>
+      <div class="md:col-span-8 space-y-3 min-w-0">${body}</div>
+    </div>
+    ${f && (st.t==="q"||st.t==="act") ? fbBox(f.good, f.msg) : ""}
+    <div class="flex justify-between items-center pt-1">
+      <button onclick="prev()" style="visibility:${S.i===0?"hidden":"visible"}" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-mono rounded-lg border border-slate-700"><i class="fa-solid fa-chevron-left"></i> Anterior</button>
+      <button onclick="next()" ${done?"":"disabled"} class="px-5 py-2.5 font-bold text-xs font-mono rounded-lg transition-all flex items-center gap-2 ${done?"bg-cyan-500 hover:bg-cyan-400 text-slate-950":"bg-slate-800 text-slate-500 cursor-not-allowed"}">${done?nextTxt:'<i class="fa-solid fa-lock"></i> Responde para continuar'}</button>
+    </div>
+  </div>`;
 }
 
 function win(){
-  return `<div class="hero"><h1>¡MISIÓN CUMPLIDA!</h1><p>Has recuperado el sistema de ingeniería.</p></div>
-  <div class="card" style="text-align:center">${LV.map(L=>`<span class="badge">🏅 ${esc(L.b)}</span>`).join("")}</div>
-  <div class="card"><p>¡Buen trabajo, ingeniero! La programación no consiste únicamente en escribir instrucciones: también requiere comprender problemas, organizar soluciones, analizar resultados y corregir errores.</p>
-  <p>Has completado la misión. Estos fundamentos serán útiles para resolver problemas en cualquier área de la ingeniería.</p></div>
-  <button onclick="location.href='../index.html'">Volver al menú</button>`;
+  return `<div class="cyber-card cyber-card-glow max-w-3xl w-full p-6 sm:p-8 rounded-2xl space-y-6 text-center border border-amber-500/50">
+    <div class="flex justify-center"><div class="w-40 animate-pop">${trophy("w-full")}</div></div>
+    <div class="space-y-2"><h2 class="text-3xl font-extrabold text-amber-300">¡MISIÓN CUMPLIDA!</h2>
+      <p class="text-slate-300 text-sm">Has recuperado el sistema de ingeniería.</p></div>
+    <div class="flex justify-center gap-3 flex-wrap">${LV.map((L,i)=>`<div class="w-20 text-center">${medal(i,"w-full",false)}<p class="text-[10px] font-mono text-slate-300 mt-1">${esc(L.b)}</p></div>`).join("")}</div>
+    <div class="speech-bubble p-5 text-left text-xs text-slate-200 leading-relaxed space-y-3">
+      <p>¡Buen trabajo, ingeniero! La programación no consiste únicamente en escribir instrucciones: también requiere comprender problemas, organizar soluciones, analizar resultados y corregir errores.</p>
+      <p>Estos fundamentos serán útiles para resolver problemas en cualquier área de la ingeniería.</p></div>
+    <div class="flex gap-3 justify-center flex-wrap">
+      <button onclick="go('map')" class="px-5 py-3 bg-slate-900 hover:bg-slate-800 text-cyan-300 text-xs font-mono rounded-lg border border-cyan-800"><i class="fa-solid fa-map"></i> Mapa de la misión</button>
+      <a href="../index.html" class="px-5 py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-bold text-xs font-mono rounded-lg">Volver al inicio</a>
+    </div></div>`;
+}
+
+/* ===================== INTERACCIÓN ===================== */
+function pick(k, i){
+  if (S.ok[k]) return;
+  const r = getR(k), good = i === r.a;
+  if (good) { S.ok[k] = true; save(); S.fb[k] = { good:true, msg:r.ok }; }
+  else { (S.wr[k] = S.wr[k] || []).push(i); S.fb[k] = { good:false, msg:r.bad }; }
+  render();
+}
+function mt2(li, ri, v){
+  const k = li+".act", A = LV[li].act;
+  if (S.ok[k]) return;
+  S.sel[k] = S.sel[k] || [];
+  S.sel[k][ri] = v === "" ? undefined : +v;
+  const sel = S.sel[k];
+  delete S.fb[k];
+  if (A.rows.every((_,j)=>sel[j] !== undefined)) {
+    const good = A.rows.every((row,j)=>sel[j] === row[1]);
+    S.fb[k] = { good, msg: good ? A.ok : A.bad };
+    if (good) { S.ok[k] = true; save(); }
+  }
+  render();
+}
+function oc(li, j){
+  const k = li+".act", A = LV[li].act;
+  if (S.ok[k]) return;
+  const ord = (S.ord[k] = S.ord[k] || []);
+  if (ord.includes(j)) return;
+  delete S.fb[k];
+  ord.push(j);
+  if (ord.length === A.items.length) {
+    const good = ord.every((v,n)=>v === n);
+    if (good) { S.ok[k] = true; save(); S.fb[k] = { good:true, msg:A.ok }; }
+    else { S.fb[k] = { good:false, msg:"El orden no es correcto. Revisa qué debe pasar primero y vuelve a intentarlo." }; S.ord[k] = []; }
+  }
+  render();
+}
+function orr(li){ const k = li+".act"; if (S.ok[k]) return; S.ord[k] = []; delete S.fb[k]; render(); }
+function fc(li){
+  const k = li+".act", A = LV[li].act;
+  const raw = document.getElementById("fi").value || "";
+  const v = raw.replace(/\s/g, "");
+  S.fi[k] = raw;
+  const good = v === A.ans.replace(/\s/g, "") || v === "30<=temperatura";
+  S.fb[k] = { good, msg: good ? A.ok : A.bad };
+  if (good) { S.ok[k] = true; save(); }
+  render();
 }
 
 render();
