@@ -101,8 +101,41 @@
                 <p>Hoy vamos a dar un paso fundamental en tu camino como programador: aprenderemos cómo una idea lógica que tienes en tu mente se transforma en instrucciones reales que Python puede entender y ejecutar.</p>
                 <p>Imagina que quieres resolver un problema cotidiano mediante software. Para lograrlo, debemos traducir esa lógica paso a paso utilizando variables, operadores, procesamiento y salida.</p>
             </div>
-            <button onclick="goToMenu()" class="w-full py-4 bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-bold rounded-xl text-sm transition-all shadow-lg hover:opacity-90 flex items-center justify-center gap-2 font-mono">
+            <button onclick="showScreen('screen-modo')" class="w-full py-4 bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-bold rounded-xl text-sm transition-all shadow-lg hover:opacity-90 flex items-center justify-center gap-2 font-mono">
                 <i class="fa-solid fa-rocket"></i> Comenzar Experiencia con PyBot
+            </button>
+        </div>
+    </div>
+        <!-- ================= PANTALLA 1.5: ELEGIR MODO ================= -->
+    <div id="screen-modo" class="screen-step items-center justify-center bg-slate-950 p-6 pt-20">
+        <div class="max-w-4xl w-full space-y-8 text-center">
+            <div>
+                <h2 class="text-3xl font-extrabold text-white">¿Cómo quieres practicar?</h2>
+                <p class="text-slate-400 text-xs mt-2">Elige la forma en que PyBot te acompañará hoy:</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Opción: ejercicios autocorregibles -->
+                <div onclick="showScreen('screen-menu')" class="cyber-card p-6 rounded-2xl hover:border-cyan-400 cursor-pointer transition-all hover:scale-105 space-y-4 text-left group border border-slate-800">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-950 text-cyan-400 flex items-center justify-center text-lg border border-cyan-800 group-hover:bg-cyan-500 group-hover:text-black transition-all">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+                    <h3 class="text-sm font-bold text-white group-hover:text-cyan-300">EJERCICIOS AUTOCORREGIBLES</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">Estudia cada tema con explicaciones, videos y preguntas con corrección inmediata.</p>
+                </div>
+
+                <!-- Opción: gamificación -->
+                <div onclick="window.location.href='recursos/mision-python.html'" class="cyber-card p-6 rounded-2xl hover:border-emerald-400 cursor-pointer transition-all hover:scale-105 space-y-4 text-left group border border-slate-800">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-950 text-emerald-400 flex items-center justify-center text-lg border border-emerald-800 group-hover:bg-emerald-500 group-hover:text-black transition-all">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <h3 class="text-sm font-bold text-white group-hover:text-emerald-300">RECURSO DE GAMIFICACIÓN</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">Resuelve una misión con historia: cuatro niveles y un desafío final.</p>
+                </div>
+            </div>
+
+            <button onclick="showScreen('screen-welcome')" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-mono rounded-lg border border-slate-700 transition-all">
+                <i class="fa-solid fa-chevron-left"></i> Volver
             </button>
         </div>
     </div>
@@ -164,6 +197,7 @@
                     </button>
                 </div>
             </div>
+        
 
             <div>
                 <button onclick="startExamMode()" class="px-6 py-3 bg-gradient-to-r from-purple-900 to-indigo-900 hover:from-purple-800 hover:to-indigo-800 text-purple-200 border border-purple-500/50 rounded-xl text-xs font-mono font-bold shadow-lg transition-all flex items-center gap-3 mx-auto">

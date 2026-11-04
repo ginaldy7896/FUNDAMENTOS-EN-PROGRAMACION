@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Misión Python: Ingeniería en código</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--ink:#1d2433;--mut:#5b6478;--acc:#3b5bdb;--ok:#2b8a3e;--bad:#c92a2a;--line:#dfe3ee;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#11141c;--card:#1a1f2b;--ink:#e8ebf3;--mut:#9aa3b8;--acc:#7c9cff;--ok:#51cf66;--bad:#ff6b6b;--line:#2c3446;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+main{max-width:720px;margin:0 auto;padding:24px 16px 48px}
+h1{font-size:1.6rem;margin:.2em 0}h2{font-size:1.25rem;margin:.4em 0 .5em}
+h3{font-size:.85rem;color:var(--acc);margin:.2em 0 .6em;text-transform:uppercase;letter-spacing:.05em}
+p{margin:.5em 0}ul{padding-left:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;display:block}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:10px 14px;text-align:left;white-space:pre-wrap;width:auto}
+button:hover:not(:disabled){border-color:var(--acc)}
+button:disabled{cursor:default;opacity:.8}
+button.card{width:100%;display:block;margin:14px 0;padding:18px;border-radius:14px}
+button.pri{background:var(--acc);color:#fff;border-color:var(--acc);text-align:center;font-weight:600;width:100%;margin-top:10px}
+button.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 16%,var(--card))}
+button.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--card))}
+.opts{display:grid;gap:8px}
+pre{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px;overflow-x:auto;font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;margin:10px 0;white-space:pre}
+.fb{margin-top:10px;padding:10px 12px;border-radius:10px;font-size:.95rem}
+.fb.ok{background:color-mix(in srgb,var(--ok) 15%,transparent)}
+.fb.bad{background:color-mix(in srgb,var(--bad) 12%,transparent)}
+.bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin:12px 0}
+.bar i{display:block;height:100%;background:var(--acc);transition:width .4s}
+.badge{display:inline-block;background:color-mix(in srgb,var(--acc) 15%,transparent);color:var(--acc);border-radius:99px;padding:4px 12px;font-weight:600;font-size:.9rem;margin:4px}
+.muted{color:var(--mut);font-size:.92rem}
+.hero{text-align:center;padding:16px 8px}
+.row{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--line)}
+select,input[type=text]{font:inherit;padding:9px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);width:100%}
+select{width:auto}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script>
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+const LV = [
+{ n:"Nivel 1: La señal perdida", m:"Misión 1 — Analiza el problema", t:"Análisis y variables", b:"Analista del sistema",
+  i:"El sistema está recibiendo información, pero no sabe cómo procesarla. Antes de escribir código, necesitas comprender qué datos entran, qué debe hacer el programa y qué resultado se espera.",
+  st:["El módulo de monitoreo ha dejado de generar resultados confiables. Tu primera tarea consiste en recuperar la información de un sensor y determinar cómo debe procesarse.",
+      "El sensor registra una temperatura. El sistema debe guardar ese dato, analizarlo y mostrar un mensaje indicando si la temperatura es normal o requiere revisión.",
+      "Antes de programar, identifica los elementos del problema."],
+  retos:[
+    { h:"Reto 1 · Entradas, proceso y salida", q:"El sistema recibe una temperatura de 32, la compara con un límite de 30 y muestra una alerta si alcanza o supera ese límite. ¿Cuál opción identifica correctamente los elementos del problema?",
+      o:["Entrada: la alerta. Proceso: mostrar el mensaje. Salida: la temperatura.","Entrada: la temperatura. Proceso: compararla con el límite. Salida: el mensaje del sistema.","Entrada: el mensaje. Proceso: almacenar la alerta. Salida: el límite.","Entrada: el límite. Proceso: mostrar la temperatura. Salida: compararla."],
+      a:1,
+      ok:"¡Muy bien! Primero se recibe el dato, después se procesa mediante una comparación y finalmente se obtiene una salida. Este análisis permite definir qué debe hacer el programa antes de escribir el código.",
+      bad:"Piensa en el orden del proceso: ¿qué información recibe el sistema?, ¿qué operación realiza con ella?, ¿qué resultado entrega?" },
+    { h:"Reto 2 · Selecciona la variable correcta", q:"Necesitamos guardar la temperatura 32.5 en Python. ¿Cuál instrucción es la adecuada?",
+      o:["temperatura = 32.5","32.5 = temperatura","temperatura == 32.5","print = temperatura"], a:0,
+      ok:"¡Correcto! La variable temperatura almacena el valor 32.5. Python lo reconoce como un número decimal de tipo float.",
+      bad:"Para asignar un valor a una variable se utiliza =. El nombre va a la izquierda y el valor a la derecha." }
+  ],
+  act:{ t:"match", rows:[["25",0],["25.5",1],['"Alerta"',2]], opts:["int — entero","float — decimal","str — texto"],
+        ok:"¡Datos recuperados! Ya reconoces cómo representar la información que un programa necesita procesar.",
+        bad:"Hay datos mal clasificados. Revisa el tipo de cada valor." } },
+
+{ n:"Nivel 2: Reconstruye el algoritmo", m:"Misión 2 — Diseña la solución", t:"Algoritmos y secuencias", b:"Arquitecto de algoritmos",
+  i:"Ya tienes los datos del sistema. Ahora necesitas organizar las instrucciones para que el programa sepa qué hacer y en qué orden.",
+  st:["El sistema ya puede recibir y almacenar la temperatura, pero sus instrucciones están desordenadas. Si se ejecutan en una secuencia incorrecta, el resultado no será confiable.",
+      "Tu misión es reconstruir el algoritmo antes de traducirlo a Python."],
+  retos:[
+    { h:"Reto 1 · Ordena el procedimiento", q:"¿Cuál es el orden lógico para resolver el problema de la temperatura?",
+      o:["Mostrar el resultado → recibir la temperatura → comparar el dato.","Comparar el dato → mostrar el resultado → recibir la temperatura.","Recibir la temperatura → comparar con el límite → mostrar el resultado.","Mostrar el resultado → comparar el dato → recibir la temperatura."], a:2,
+      ok:"¡Excelente! Un algoritmo debe seguir una secuencia lógica. Primero obtiene los datos, luego realiza el proceso y finalmente presenta el resultado.",
+      bad:"Un programa no puede comparar una temperatura que todavía no ha recibido. Revisa cuál debe ser el primer paso." },
+    { h:"Reto 2 · Completa el algoritmo", q:"Algoritmo: 1) Leer la temperatura. 2) ____. 3) Si la temperatura es mayor o igual a 30, mostrar “Revisar temperatura”. 4) En caso contrario, mostrar “Valores normales”. ¿Qué debe ir en el paso 2?",
+      o:["Eliminar la temperatura.","Comparar la temperatura con el límite de 30.","Mostrar siempre “Valores normales”.","Volver a leer la temperatura sin analizarla."], a:1,
+      ok:"¡Muy bien! La comparación determina qué decisión tomará el sistema. Este paso conecta el análisis del problema con la lógica que después se implementará en Python.",
+      bad:"El algoritmo necesita una operación que permita decidir cuál mensaje mostrar según el valor recibido." }
+  ],
+  act:{ t:"order", items:["Recibir la temperatura.","Guardar el valor en una variable.","Comparar la temperatura con el límite.","Mostrar el mensaje correspondiente."], show:[2,0,3,1],
+        ok:"¡Algoritmo reconstruido! Has organizado la solución antes de escribir el programa. Un algoritmo claro facilita la programación y la detección de errores." } },
+
+{ n:"Nivel 3: Programa el sistema", m:"Misión 3 — Escribe el código", t:"Python y condicionales", b:"Programador en acción",
+  i:"El algoritmo está listo, pero el sistema necesita instrucciones que pueda ejecutar. Es momento de transformar la solución en código Python.",
+  st:["Has recuperado la lógica del sistema. Sin embargo, todavía no puede tomar decisiones automáticamente.",
+      "Debes programar una instrucción que almacene el dato, compare su valor con un límite y muestre el mensaje correspondiente."],
+  retos:[
+    { h:"Reto 1 · Predice el resultado", c:"temperatura = 32\nprint(temperatura)", q:"¿Qué mostrará este código?",
+      o:["temperatura","32","print","Un error de sintaxis."], a:1,
+      ok:"¡Correcto! La variable almacena el número 32 y print(temperatura) muestra su valor en pantalla.",
+      bad:"Cuando escribes el nombre de una variable dentro de print(), Python muestra el valor almacenado, no el nombre de la variable." },
+    { h:"Reto 2 · Completa el condicional", q:"Selecciona el código que permite mostrar una alerta cuando la temperatura es igual o superior a 30.",
+      o:["if temperatura >= 30:\n    print(\"Revisar temperatura\")\nelse:\n    print(\"Valores normales\")",
+         "if temperatura = 30:\n    print(\"Revisar temperatura\")\nelse:\n    print(\"Valores normales\")",
+         "if temperatura < 30:\n    print(\"Revisar temperatura\")\nelse:\n    print(\"Valores normales\")",
+         "print(\"Revisar temperatura\")\nprint(\"Valores normales\")"], a:0,
+      ok:"¡Código correcto! El operador >= significa “mayor o igual que”. El bloque if se ejecuta cuando la condición es verdadera y else cuando es falsa.",
+      bad:"Revisa tres aspectos: el operador de comparación, el sentido de la condición y la estructura de if y else. En Python, = asigna un valor y == compara igualdad." },
+    { h:"Reto 3 · Recibe un dato", q:"Queremos pedirle al usuario que ingrese una temperatura. ¿Qué instrucción permite recibir un dato por teclado?",
+      o:["print(\"Ingrese temperatura\")","input(\"Ingrese temperatura: \")","if(\"Ingrese temperatura\")","int = \"temperatura\""], a:1,
+      ok:"¡Bien! input() permite recibir información del usuario. Ten presente que el valor que devuelve es texto; si necesitas hacer operaciones numéricas, debes convertirlo, por ejemplo, con float() o int().",
+      bad:"print() muestra información, mientras que input() permite solicitar un dato al usuario." }
+  ],
+  act:{ t:"fill", c:"temperatura = 32\nif ____:\n    print(\"Revisar temperatura\")\nelse:\n    print(\"Valores normales\")", ans:"temperatura >= 30",
+        ok:"¡Sistema programado! Has convertido una condición del problema en una instrucción de Python. El programa puede tomar decisiones de acuerdo con el valor recibido.",
+        bad:"Revisa el operador: necesitas comparar con “mayor o igual que”, no asignar un valor." } },
+
+{ n:"Nivel 4: Detecta la falla", m:"Misión 4 — Depura el código", t:"Errores y pruebas", b:"Cazador de errores",
+  i:"El sistema ya ejecuta instrucciones, pero un error impide completar la misión. Debes identificar el problema, corregirlo y comprobar que la solución funciona.",
+  st:["El módulo de monitoreo ha sido activado, pero aparece un error en el código. El sistema no puede continuar hasta que encuentres la causa.",
+      "Analiza las instrucciones y demuestra que puedes identificar errores sin limitarte a copiar código."],
+  retos:[
+    { h:"Reto 1 · Encuentra el error", c:"temperatura = 32\nif temperatura >= 30\n    print(\"Revisar temperatura\")", q:"¿Qué problema presenta el siguiente fragmento?",
+      o:["La variable debe llamarse print.","Falta dos puntos (:) al final de la condición.","La temperatura no puede ser un número.","La función print() no se puede utilizar dentro de if."], a:1,
+      ok:"¡Error identificado! En Python, las instrucciones if deben terminar con dos puntos para indicar el inicio del bloque. Código corregido:",
+      x:"temperatura = 32\nif temperatura >= 30:\n    print(\"Revisar temperatura\")",
+      bad:"Revisa la línea de la condición. Python utiliza dos puntos para señalar el inicio de un bloque de instrucciones." },
+    { h:"Reto 2 · Comprueba el resultado", c:"temperatura = 25\nif temperatura >= 30:\n    print(\"Revisar temperatura\")\nelse:\n    print(\"Valores normales\")", q:"¿Qué mensaje aparecerá?",
+      o:["Revisar temperatura","Valores normales","25","No aparece ningún mensaje."], a:1,
+      ok:"¡Prueba superada! Como 25 >= 30 es falso, Python ejecuta el bloque else y muestra “Valores normales”.",
+      bad:"Sustituye la variable por su valor: ¿es 25 mayor o igual a 30? La respuesta determina qué bloque se ejecuta." },
+    { h:"Actividad práctica · Paso 1 · Corrige", c:"puntos = 15\nif puntos >= 10\n    print(\"Misión completada\")\nelse:\n    print(\"Intenta de nuevo\")", q:"¿Qué debes hacer para que el código funcione?",
+      o:["Añadir dos puntos al final de if puntos >= 10.","Cambiar el valor de puntos a 10.","Eliminar la instrucción else.","Escribir print antes de if."], a:0,
+      ok:"¡Correcto! Sin los dos puntos, Python no reconoce el inicio del bloque del if.",
+      bad:"Revisa la línea del if: Python necesita un signo al final de la condición para iniciar el bloque." },
+    { h:"Actividad práctica · Paso 2 · Prueba", q:"Con puntos = 15, ¿qué resultado se obtiene?",
+      o:["Misión completada","Intenta de nuevo","15","No aparece nada."], a:0,
+      ok:"¡Sistema restaurado! Has identificado un error de sintaxis y comprobado la lógica del programa. En programación, corregir y probar son pasos fundamentales para conseguir resultados confiables.",
+      bad:"Sustituye puntos por 15 y pregunta: ¿es 15 mayor o igual a 10?" }
+  ] }
+];
+
+const FIN = {
+  n:"Desafío final: Recuperación del sistema",
+  i:"El sistema central ha recuperado sus módulos, pero necesita que verifiques un programa completo antes de volver a funcionar. Misión: analizar el problema, interpretar el código y comprobar el resultado.",
+  s:"Un sistema de monitoreo debe evaluar una lectura de temperatura. Si el valor es igual o superior a 30, debe mostrar una alerta. En caso contrario, debe indicar que los valores son normales.",
+  c:"temperatura = 35\nif temperatura >= 30:\n    print(\"Alerta\")\nelse:\n    print(\"Normal\")",
+  retos:[
+    { h:"Paso 1 · Identifica la entrada", q:"¿Qué dato necesita el programa para resolver el problema?", o:["El mensaje de alerta.","La temperatura registrada.","La respuesta del programa.","El nombre del sistema."], a:1,
+      ok:"¡Correcto! La temperatura es la entrada porque es el dato que el programa necesita evaluar.", bad:"Piensa qué dato debe evaluar el programa antes de decidir nada." },
+    { h:"Paso 2 · Selecciona la condición", q:"¿Cuál condición representa correctamente la regla del sistema?", o:["temperatura < 30","temperatura == 30","temperatura >= 30","temperatura = 30"], a:2,
+      ok:">= incluye los valores mayores que 30 y también el valor 30. La asignación = no sustituye una comparación.", bad:"La regla incluye el 30. Revisa qué operador incluye también el límite." },
+    { h:"Paso 3 · Predice el resultado", q:"¿Qué mostrará el programa cuando la temperatura sea 35?", o:["Normal","35","Alerta","No muestra nada."], a:2,
+      ok:"¡Correcto! Como 35 es mayor que 30, la condición es verdadera y se ejecuta el bloque if.", bad:"Sustituye temperatura por 35 y evalúa si 35 >= 30 es verdadero o falso." },
+    { h:"Paso 4 · Prueba un segundo valor", q:"¿Qué debería mostrar el mismo programa si la temperatura cambia a 20?", o:["Normal","Alerta","20","No muestra nada."], a:0,
+      ok:"¡Verificación completada! Has probado el programa con dos valores distintos y comprobado que la condición permite obtener resultados diferentes según la entrada.", bad:"¿Es 20 mayor o igual que 30? Si no lo es, ¿qué bloque se ejecuta?" }
+  ] };
+
+let S = { v:"intro", L:0, ok:{}, fb:{}, sel:{}, ord:{} };
+
+function getR(k){ const [li,ri]=k.split("."); const L = li==="4" ? FIN : LV[+li]; return L.retos[+ri]; }
+function ld(li){
+  const L = li===4 ? FIN : LV[li];
+  const quizzesDone = L.retos.every((_,i)=>S.ok[li+"."+i]);
+  const actDone = li===4 || !L.act || S.ok[li+".act"];
+  return quizzesDone && actDone;
+}
+function go(v,L){ S.v=v; if(L!==undefined) S.L=L; render(); }
+function render(){
+  const f={intro,map,lvl:()=>lvl(S.L),fin,win}[S.v];
+  document.getElementById("app").innerHTML = f();
+  window.scrollTo(0,0);
+}
+
+function pick(k,i){
+  if(S.ok[k]) return;
+  const r=getR(k), good = i===r.a;
+  S.fb[k]={i,good};
+  if(good) S.ok[k]=true;
+  render();
+}
+function qz(k){
+  const r=getR(k), st=S.fb[k], done=!!S.ok[k];
+  let h=`<div class="card"><h3>${esc(r.h)}</h3><p>${esc(r.q)}</p>`;
+  if(r.c) h+=`<pre>${esc(r.c)}</pre>`;
+  h+=`<div class="opts">`;
+  r.o.forEach((t,i)=>{
+    let c="";
+    if(done && i===r.a) c="right";
+    else if(st && st.i===i) c = st.good ? "right" : "wrong";
+    h+=`<button class="${c}" ${done?"disabled":""} onclick="pick('${k}',${i})">${esc(t)}</button>`;
+  });
+  h+=`</div>`;
+  if(st) h+=`<div class="fb ${st.good?"ok":"bad"}">${esc(st.good?r.ok:r.bad)}</div>`;
+  if(done && r.x) h+=`<pre>${esc(r.x)}</pre>`;
+  return h+`</div>`;
+}
+
+function mt2(li,ri,v){
+  const k=li+".act", A=LV[li].act;
+  if(S.ok[k]) return;
+  S.sel[k]=S.sel[k]||[];
+  S.sel[k][ri] = v==="" ? undefined : +v;
+  const sel=S.sel[k];
+  const all = A.rows.every((_,j)=>sel[j]!==undefined);
+  delete S.fb[k];
+  if(all){
+    const good = A.rows.every((row,j)=>sel[j]===row[1]);
+    S.fb[k]={good,msg:good?A.ok:A.bad};
+    if(good) S.ok[k]=true;
+  }
+  render();
+}
+function mt(li){
+  const k=li+".act", A=LV[li].act, sel=S.sel[k]||[], st=S.fb[k], done=!!S.ok[k];
+  let h=`<div class="card"><h3>Actividad práctica: clasifica los datos</h3><p class="muted">Relaciona cada dato con su tipo correcto.</p>`;
+  A.rows.forEach((row,ri)=>{
+    h+=`<div class="row"><code>${esc(row[0])}</code><select ${done?"disabled":""} onchange="mt2(${li},${ri},this.value)"><option value="">Elige…</option>${A.opts.map((o,j)=>`<option value="${j}" ${sel[ri]===j?"selected":""}>${esc(o)}</option>`).join("")}</select></div>`;
+  });
+  if(st) h+=`<div class="fb ${st.good?"ok":"bad"}">${esc(st.msg)}</div>`;
+  return h+`</div>`;
+}
+
+function oc(li,j){
+  const k=li+".act", A=LV[li].act;
+  if(S.ok[k]) return;
+  const ord=(S.ord[k]=S.ord[k]||[]);
+  if(ord.includes(j)) return;
+  ord.push(j);
+  if(ord.length===A.items.length){
+    const good = ord.every((v,n)=>v===n);
+    if(good){ S.ok[k]=true; S.fb[k]={good:true,msg:A.ok}; }
+    else { S.fb[k]={good:false,msg:"El orden no es correcto. Revisa qué debe pasar primero y vuelve a intentarlo."}; S.ord[k]=[]; }
+  }
+  render();
+}
+function orr(li){ const k=li+".act"; if(S.ok[k]) return; S.ord[k]=[]; delete S.fb[k]; render(); }
+function od(li){
+  const k=li+".act", A=LV[li].act, ord=S.ord[k]||[], st=S.fb[k], done=!!S.ok[k];
+  let h=`<div class="card"><h3>Actividad práctica: arma la secuencia</h3><p class="muted">Toca los pasos en el orden en que deben ejecutarse.</p>`;
+  h+=`<p><strong>Tu secuencia:</strong><br>${ord.length? ord.map((j,n)=>`${n+1}. ${esc(A.items[j])}`).join("<br>") : "—"}</p><div class="opts">`;
+  A.show.forEach(j=>{ h+=`<button ${done||ord.includes(j)?"disabled":""} onclick="oc(${li},${j})">${esc(A.items[j])}</button>`; });
+  h+=`</div>`;
+  if(!done) h+=`<button onclick="orr(${li})" style="margin-top:8px">Reiniciar</button>`;
+  if(st) h+=`<div class="fb ${st.good?"ok":"bad"}">${esc(st.msg)}</div>`;
+  return h+`</div>`;
+}
+
+function fc(li){
+  const k=li+".act", A=LV[li].act;
+  const v=(document.getElementById("fi").value||"").replace(/\s/g,"");
+  const good = v===A.ans.replace(/\s/g,"");
+  S.fb[k]={good,msg:good?A.ok:A.bad};
+  if(good) S.ok[k]=true;
+  render();
+}
+function fl(li){
+  const k=li+".act", A=LV[li].act, st=S.fb[k], done=!!S.ok[k];
+  let h=`<div class="card"><h3>Actividad práctica: completa el programa</h3><p>Escribe la condición que falta:</p><pre>${esc(A.c)}</pre>`;
+  h+=`<input type="text" id="fi" placeholder="Escribe la condición" ${done?"disabled":""} value="${done?esc(A.ans):""}">`;
+  h+=`<button class="pri" ${done?"disabled":""} onclick="fc(${li})">Comprobar</button>`;
+  if(st) h+=`<div class="fb ${st.good?"ok":"bad"}">${esc(st.msg)}</div>`;
+  return h+`</div>`;
+}
+
+function map(){
+  const done = [0,1,2,3].filter(i=>ld(i)).length;
+  let h=`<h1>Mapa de la misión</h1><div class="bar"><i style="width:${done/4*100}%"></i></div><p class="muted">${done} de 4 niveles completados</p>`;
+  LV.forEach((L,i)=>{
+    const un = i===0 || ld(i-1), dn = ld(i);
+    h+=`<button class="card" ${un?"":"disabled"} onclick="go('lvl',${i})"><strong>${esc(L.n)}</strong><br><span class="muted">${esc(L.m)} ${dn?"· ✔ "+esc(L.b):un?"":"· 🔒 Bloqueado"}</span></button>`;
+  });
+  const fin = done===4;
+  h+=`<button class="card" ${fin?"":"disabled"} onclick="go('fin')"><strong>${esc(FIN.n)}</strong><br><span class="muted">${fin?"Disponible":"🔒 Completa los cuatro niveles"}</span></button>`;
+  return h+`<button onclick="location.href='../index.html'">← Volver</button>`;
+}
+
+function intro(){
+  return `<div class="hero"><p class="muted">Recurso de gamificación</p><h1>MISIÓN PYTHON</h1><p><strong>Ingeniería en código</strong></p><p class="muted">Una misión. Cuatro niveles. Un sistema que necesita tu ayuda.</p></div>
+  <div class="card"><p>El Centro de Sistemas de Ingeniería ha sufrido una falla. Los datos no se procesan correctamente, las decisiones automáticas están fallando y el sistema no puede completar sus tareas.</p>
+  <p>Como integrante del equipo de recuperación, deberás superar cuatro niveles para restaurar su funcionamiento. Analiza problemas, diseña algoritmos, programa en Python y encuentra errores.</p>
+  <p>Cada decisión te acercará a completar la misión. ¿Estás listo para demostrar tus habilidades?</p></div>
+  <div class="card"><h3>¿Cómo jugar?</h3><ul>
+    <li>Avanza por los niveles en el orden establecido.</li><li>Lee la situación antes de responder cada reto.</li>
+    <li>Selecciona una respuesta o completa la actividad según las instrucciones.</li><li>Lee la retroalimentación para comprender tus aciertos y corregir tus errores.</li>
+    <li>Completa el desafío final para restaurar el sistema.</li></ul>
+    <h3>Reglas del juego</h3><ul>
+    <li>Cada nivel representa una etapa de solución de un problema.</li><li>Puedes volver a intentar las preguntas si te equivocas.</li>
+    <li>No se trata sólo de acertar: debes comprender por qué una solución funciona.</li><li>Obtendrás una insignia simbólica al completar cada etapa.</li></ul>
+    <p class="muted"><strong>Objetivo de aprendizaje:</strong> aplicar los fundamentos de programación para analizar problemas, construir algoritmos, interpretar código Python y verificar soluciones.</p></div>
+  <button class="pri" onclick="go('map')">INICIAR MISIÓN</button>
+  <button onclick="location.href='../index.html'" style="margin-top:8px">← Volver</button>`;
+}
+
+function lvl(li){
+  const L=LV[li];
+  let h=`<p class="muted">Nivel ${li+1} de 4 · ${esc(L.m)}</p><h2>${esc(L.n.split(": ")[1])}</h2><p class="muted">${esc(L.t)}</p><p>${esc(L.i)}</p>
+  <div class="card"><h3>Historia del nivel</h3>${L.st.map(p=>`<p>${esc(p)}</p>`).join("")}</div>`;
+  h+=L.retos.map((_,r)=>qz(li+"."+r)).join("");
+  if(L.act) h+= L.act.t==="match" ? mt(li) : L.act.t==="order" ? od(li) : fl(li);
+  if(ld(li)) h+=`<div class="card"><span class="badge">🏅 ${esc(L.b)}</span><p>¡Nivel completado! Has obtenido la insignia.</p></div>`;
+  return h+`<button class="pri" onclick="go('map')">Volver al mapa</button>`;
+}
+
+function fin(){
+  const done = FIN.retos.every((_,i)=>S.ok["4."+i]);
+  let h=`<p class="muted">Desafío final</p><h2>El sistema necesita una última comprobación</h2><p>${esc(FIN.i)}</p>
+  <div class="card"><h3>Situación</h3><p>${esc(FIN.s)}</p><pre>${esc(FIN.c)}</pre></div>`;
+  h+=FIN.retos.map((_,i)=>qz("4."+i)).join("");
+  if(done) h+=`<button class="pri" onclick="go('win')">Ver mensaje de victoria</button>`;
+  return h+`<button onclick="go('map')" style="margin-top:8px">← Mapa</button>`;
+}
+
+function win(){
+  return `<div class="hero"><h1>¡MISIÓN CUMPLIDA!</h1><p>Has recuperado el sistema de ingeniería.</p></div>
+  <div class="card" style="text-align:center">${LV.map(L=>`<span class="badge">🏅 ${esc(L.b)}</span>`).join("")}</div>
+  <div class="card"><p>¡Buen trabajo, ingeniero! La programación no consiste únicamente en escribir instrucciones: también requiere comprender problemas, organizar soluciones, analizar resultados y corregir errores.</p>
+  <p>Has completado la misión. Estos fundamentos serán útiles para resolver problemas en cualquier área de la ingeniería.</p></div>
+  <button onclick="location.href='../index.html'">Volver al menú</button>`;
+}
+
+render();
+</script>
+</body>
+</html>
