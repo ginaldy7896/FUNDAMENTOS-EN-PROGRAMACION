@@ -77,227 +77,200 @@
     </header>
 
     <!-- ================= PANTALLA 1: BIENVENIDA CON PYBOT (FULLSCREEN) ================= -->
-    <div id="screen-welcome" class="screen-step active items-center justify-center bg-slate-950 p-6">
-        <div class="cyber-card cyber-card-glow max-w-3xl w-full p-8 rounded-2xl space-y-6 text-center relative border border-cyan-500/50">
+    <div id="screen-welcome" class="screen-step active items-center justify-center bg-[#CCFF00] p-6 text-slate-900">
+        <div class="bg-[#0b0f19] text-slate-100 max-w-5xl w-full p-12 rounded-3xl space-y-6 text-center relative border-4 border-purple-600 shadow-[0_20px_50px_rgba(124,58,237,0.3)]">
             <div class="flex justify-center">
                 <div class="w-32 h-32 relative animate-pybot">
-                    <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-[0_0_15px_rgba(6,182,212,0.8)]">
-                        <rect x="25" y="40" width="50" height="40" rx="10" fill="#0F172A" stroke="#06B6D4" stroke-width="3"/>
-                        <rect x="32" y="47" width="36" height="24" rx="5" fill="#080C14" stroke="#10B981" stroke-width="2"/>
-                        <circle cx="42" cy="59" r="3.5" fill="#06B6D4" class="animate-pulse"/>
-                        <circle cx="58" cy="59" r="3.5" fill="#06B6D4" class="animate-pulse"/>
-                        <line x1="50" y1="40" x2="50" y2="25" stroke="#06B6D4" stroke-width="3"/>
-                        <circle cx="50" cy="22" r="4" fill="#F59E0B" class="animate-ping"/>
+                    <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-[0_0_15px_rgba(204,255,0,0.8)]">
+                        <rect x="25" y="40" width="50" height="40" rx="10" fill="#0b0f19" stroke="#CCFF00" stroke-width="3"/>
+                        <rect x="32" y="47" width="36" height="24" rx="5" fill="#080C14" stroke="#7C3AED" stroke-width="2"/>
+                        <circle cx="42" cy="59" r="3.5" fill="#CCFF00" class="animate-pulse"/>
+                        <circle cx="58" cy="59" r="3.5" fill="#CCFF00" class="animate-pulse"/>
+                        <line x1="50" y1="40" x2="50" y2="25" stroke="#CCFF00" stroke-width="3"/>
+                        <circle cx="50" cy="22" r="4" fill="#7C3AED" class="animate-ping"/>
                     </svg>
                 </div>
             </div>
+
             <div class="space-y-2">
-                <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest bg-cyan-950/80 px-3 py-1 rounded-full border border-cyan-800">
-                    PyBot v2.4 | Asistente Virtual de Ingeniería
+                <span class="text-xs font-mono text-purple-300 uppercase tracking-widest bg-purple-950/80 px-3 py-1 rounded-full border border-purple-700">
+                    PyBot v2.4 | Asistente Virtual
                 </span>
-                <h2 class="text-2xl font-bold text-white">¡Hola, Futuro Ingeniero! Soy PyBot. 🤖⚡</h2>
+                <h2 class="text-3xl font-extrabold text-[#CCFF00]">¡Hola, Futuro Ingeniero! Soy PyBot. 🤖⚡</h2>
             </div>
-            <div class="speech-bubble p-5 text-left text-xs text-slate-200 leading-relaxed space-y-3">
+
+            <div class="bg-[#121826] border-2 border-purple-500/60 p-5 rounded-2xl text-left text-sm text-slate-200 leading-relaxed space-y-3 shadow-inner">
                 <p>Hoy vamos a dar un paso fundamental en tu camino como programador: aprenderemos cómo una idea lógica que tienes en tu mente se transforma en instrucciones reales que Python puede entender y ejecutar.</p>
                 <p>Imagina que quieres resolver un problema cotidiano mediante software. Para lograrlo, debemos traducir esa lógica paso a paso utilizando variables, operadores, procesamiento y salida.</p>
             </div>
-            <button onclick="showScreen('screen-modo')" class="w-full py-4 bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-bold rounded-xl text-sm transition-all shadow-lg hover:opacity-90 flex items-center justify-center gap-2 font-mono">
+
+            <button onclick="goToMenu()" class="w-full py-4 bg-[#CCFF00] hover:bg-[#b3e600] text-slate-950 font-extrabold rounded-xl text-sm transition-all shadow-lg hover:scale-[1.01] flex items-center justify-center gap-2 font-mono">
                 <i class="fa-solid fa-rocket"></i> Comenzar Experiencia con PyBot
-            </button>
-        </div>
-    </div>
-        <!-- ================= PANTALLA 1.5: ELEGIR MODO ================= -->
-    <div id="screen-modo" class="screen-step items-center justify-center bg-slate-950 p-6 pt-20">
-        <div class="max-w-4xl w-full space-y-8 text-center">
-            <div>
-                <h2 class="text-3xl font-extrabold text-white">¿Cómo quieres practicar?</h2>
-                <p class="text-slate-400 text-xs mt-2">Elige la forma en que PyBot te acompañará hoy:</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Opción: ejercicios autocorregibles -->
-                <div onclick="showScreen('screen-menu')" class="cyber-card p-6 rounded-2xl hover:border-cyan-400 cursor-pointer transition-all hover:scale-105 space-y-4 text-left group border border-slate-800">
-                    <div class="w-12 h-12 rounded-xl bg-cyan-950 text-cyan-400 flex items-center justify-center text-lg border border-cyan-800 group-hover:bg-cyan-500 group-hover:text-black transition-all">
-                        <i class="fa-solid fa-list-check"></i>
-                    </div>
-                    <h3 class="text-sm font-bold text-white group-hover:text-cyan-300">EJERCICIOS AUTOCORREGIBLES</h3>
-                    <p class="text-xs text-slate-300 leading-relaxed">Estudia cada tema con explicaciones, videos y preguntas con corrección inmediata.</p>
-                </div>
-
-                <!-- Opción: gamificación -->
-                <div onclick="window.location.href='recursos/mision-python.html'" class="cyber-card p-6 rounded-2xl hover:border-emerald-400 cursor-pointer transition-all hover:scale-105 space-y-4 text-left group border border-slate-800">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-950 text-emerald-400 flex items-center justify-center text-lg border border-emerald-800 group-hover:bg-emerald-500 group-hover:text-black transition-all">
-                        <i class="fa-solid fa-trophy"></i>
-                    </div>
-                    <h3 class="text-sm font-bold text-white group-hover:text-emerald-300">RECURSO DE GAMIFICACIÓN</h3>
-                    <p class="text-xs text-slate-300 leading-relaxed">Resuelve una misión con historia: cuatro niveles y un desafío final.</p>
-                </div>
-            </div>
-
-            <button onclick="showScreen('screen-welcome')" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-mono rounded-lg border border-slate-700 transition-all">
-                <i class="fa-solid fa-chevron-left"></i> Volver
             </button>
         </div>
     </div>
 
     <!-- ================= PANTALLA 2: ¿QUÉ QUIERES APRENDER HOY? ================= -->
-    <div id="screen-menu" class="screen-step items-center justify-center bg-slate-950 p-6 pt-20">
-        <div class="max-w-5xl w-full space-y-8 text-center">
-            <div class="flex items-center justify-center gap-4">
-                <div class="w-16 h-16 relative animate-pybot flex-shrink-0">
-                    <svg viewBox="0 0 100 100" class="w-full h-full">
-                        <rect x="25" y="40" width="50" height="40" rx="10" fill="#0F172A" stroke="#06B6D4" stroke-width="3"/>
-                        <circle cx="42" cy="59" r="3.5" fill="#06B6D4"/>
-                        <circle cx="58" cy="59" r="3.5" fill="#06B6D4"/>
-                    </svg>
+    <div id="screen-menu" class="screen-step items-center justify-center bg-[#0b0f19] p-6">
+        <div class="max-w-5xl w-full space-y-8">
+            <div class="flex flex-col items-center text-center space-y-2">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 animate-pybot">
+                        <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-[0_0_8px_rgba(204,255,0,0.6)]">
+                            <rect x="20" y="30" width="60" height="45" rx="12" fill="#0b0f19" stroke="#CCFF00" stroke-width="5"/>
+                            <rect x="30" y="40" width="40" height="25" rx="6" fill="#080C14" stroke="#7C3AED" stroke-width="3"/>
+                            <circle cx="42" cy="52" r="4" fill="#CCFF00"/>
+                            <circle cx="58" cy="52" r="4" fill="#CCFF00"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-5xl font-extrabold text-[#CCFF00] tracking-tight">¿Qué quieres aprender hoy?</h2>
                 </div>
-                <div>
-                    <h2 class="text-3xl font-extrabold text-white">¿Qué quieres aprender hoy?</h2>
-                    <p class="text-slate-400 text-xs">PyBot te guiará paso a paso por los siguientes módulos de ingeniería:</p>
-                </div>
+                <p class="text-xs text-slate-300 font-mono">PyBot te guiará paso a paso por los siguientes módulos de ingeniería:</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Tema 1 -->
-                <div onclick="startTopic(1)" class="cyber-card p-6 rounded-2xl hover:border-cyan-400 cursor-pointer transition-all hover:scale-105 space-y-4 text-left flex flex-col justify-between group border border-slate-800">
+                
+                <!-- TARJETA 1: VARIABLES -->
+                <div onclick="startTopic(1)" class="cursor-pointer bg-[#CCFF00] hover:bg-[#b8e600] text-slate-950 p-6 rounded-2xl border-4 border-purple-600 shadow-[0_10px_30px_rgba(124,58,237,0.25)] transition-all hover:-translate-y-1.5 flex flex-col justify-between space-y-5">
                     <div class="space-y-3">
-                        <div class="w-12 h-12 rounded-xl bg-cyan-950 text-cyan-400 flex items-center justify-center font-mono font-bold text-lg border border-cyan-800 group-hover:bg-cyan-500 group-hover:text-black transition-all">1</div>
-                        <h3 class="text-sm font-bold text-white group-hover:text-cyan-300">VARIABLES</h3>
-                        <p class="text-[11px] text-slate-400 font-mono">LAS "CAJAS" DE LA MEMORIA</p>
-                        <p class="text-xs text-slate-300 leading-relaxed">Espacios en memoria y tipos primitivos de asignación en Python.</p>
+                        <div class="w-10 h-10 rounded-xl bg-slate-950 text-[#CCFF00] font-extrabold font-mono flex items-center justify-center text-lg border-2 border-purple-600">1</div>
+                        <div>
+                            <h3 class="text-lg font-black uppercase tracking-wide text-slate-950">VARIABLES</h3>
+                            <p class="text-[10px] font-mono font-bold text-purple-900 uppercase">LAS "CAJAS" DE LA MEMORIA</p>
+                        </div>
+                        <p class="text-sm font-medium text-slate-900 leading-relaxed">Espacios en memoria y tipos primitivos de asignación en Python.</p>
                     </div>
-                    <button class="w-full py-2 bg-slate-900 group-hover:bg-cyan-600 group-hover:text-black text-cyan-300 font-mono text-xs rounded-lg border border-cyan-800 transition-all flex items-center justify-center gap-2">
+                    <button class="w-full py-2.5 bg-slate-950 hover:bg-purple-950 text-[#CCFF00] font-bold text-xs font-mono rounded-xl border-2 border-purple-600 transition-colors flex items-center justify-center gap-2">
                         Estudiar con PyBot <i class="fa-solid fa-play text-[10px]"></i>
                     </button>
                 </div>
 
-                <!-- Tema 2 -->
-                <div onclick="startTopic(2)" class="cyber-card p-6 rounded-2xl hover:border-purple-400 cursor-pointer transition-all hover:scale-105 space-y-4 text-left flex flex-col justify-between group border border-slate-800">
+                <!-- TARJETA 2: OPERADORES -->
+                <div onclick="startTopic(2)" class="cursor-pointer bg-[#CCFF00] hover:bg-[#b8e600] text-slate-950 p-6 rounded-2xl border-4 border-purple-600 shadow-[0_10px_30px_rgba(124,58,237,0.25)] transition-all hover:-translate-y-1.5 flex flex-col justify-between space-y-5">
                     <div class="space-y-3">
-                        <div class="w-12 h-12 rounded-xl bg-purple-950 text-purple-400 flex items-center justify-center font-mono font-bold text-lg border border-purple-800 group-hover:bg-purple-500 group-hover:text-black transition-all">2</div>
-                        <h3 class="text-sm font-bold text-white group-hover:text-purple-300">OPERADORES</h3>
-                        <p class="text-[11px] text-slate-400 font-mono">LAS HERRAMIENTAS DE MANIPULACIÓN</p>
-                        <p class="text-xs text-slate-300 leading-relaxed">Operadores aritméticos, de comparación y lógicos.</p>
+                        <div class="w-10 h-10 rounded-xl bg-slate-950 text-[#CCFF00] font-extrabold font-mono flex items-center justify-center text-lg border-2 border-purple-600">2</div>
+                        <div>
+                            <h3 class="text-lg font-black uppercase tracking-wide text-slate-950">OPERADORES</h3>
+                            <p class="text-[10px] font-mono font-bold text-purple-900 uppercase">LAS HERRAMIENTAS DE MANIPULACIÓN</p>
+                        </div>
+                        <p class="text-sm font-medium text-slate-900 leading-relaxed">Operadores aritméticos, de comparación y lógicos.</p>
                     </div>
-                    <button class="w-full py-2 bg-slate-900 group-hover:bg-purple-600 group-hover:text-black text-purple-300 font-mono text-xs rounded-lg border border-purple-800 transition-all flex items-center justify-center gap-2">
+                    <button class="w-full py-2.5 bg-slate-950 hover:bg-purple-950 text-[#CCFF00] font-bold text-xs font-mono rounded-xl border-2 border-purple-600 transition-colors flex items-center justify-center gap-2">
                         Estudiar con PyBot <i class="fa-solid fa-play text-[10px]"></i>
                     </button>
                 </div>
 
-                <!-- Tema 3 -->
-                <div onclick="startTopic(3)" class="cyber-card p-6 rounded-2xl hover:border-emerald-400 cursor-pointer transition-all hover:scale-105 space-y-4 text-left flex flex-col justify-between group border border-slate-800">
+                <!-- TARJETA 3: PROCESAMIENTO Y SALIDA -->
+                <div onclick="startTopic(3)" class="cursor-pointer bg-[#CCFF00] hover:bg-[#b8e600] text-slate-950 p-6 rounded-2xl border-4 border-purple-600 shadow-[0_10px_30px_rgba(124,58,237,0.25)] transition-all hover:-translate-y-1.5 flex flex-col justify-between space-y-5">
                     <div class="space-y-3">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-950 text-emerald-400 flex items-center justify-center font-mono font-bold text-lg border border-emerald-800 group-hover:bg-emerald-500 group-hover:text-black transition-all">3</div>
-                        <h3 class="text-sm font-bold text-white group-hover:text-emerald-300">PROCESAMIENTO Y SALIDA</h3>
-                        <p class="text-[11px] text-slate-400 font-mono">LA LÓGICA EN ACCIÓN</p>
-                        <p class="text-xs text-slate-300 leading-relaxed">Precedencia de operadores y funciones de salida print().</p>
+                        <div class="w-10 h-10 rounded-xl bg-slate-950 text-[#CCFF00] font-extrabold font-mono flex items-center justify-center text-lg border-2 border-purple-600">3</div>
+                        <div>
+                            <h3 class="text-lg font-black uppercase tracking-wide text-slate-950">PROCESAMIENTO Y SALIDA</h3>
+                            <p class="text-[10px] font-mono font-bold text-purple-900 uppercase">LA LÓGICA EN ACCIÓN</p>
+                        </div>
+                        <p class="text-sm font-medium text-slate-900 leading-relaxed">Precedencia de operadores y funciones de salida print().</p>
                     </div>
-                    <button class="w-full py-2 bg-slate-900 group-hover:bg-emerald-600 group-hover:text-black text-emerald-300 font-mono text-xs rounded-lg border border-emerald-800 transition-all flex items-center justify-center gap-2">
+                    <button class="w-full py-2.5 bg-slate-950 hover:bg-purple-950 text-[#CCFF00] font-bold text-xs font-mono rounded-xl border-2 border-purple-600 transition-colors flex items-center justify-center gap-2">
                         Estudiar con PyBot <i class="fa-solid fa-play text-[10px]"></i>
                     </button>
                 </div>
-            </div>
-        
-
-            <div>
-                <button onclick="startExamMode()" class="px-6 py-3 bg-gradient-to-r from-purple-900 to-indigo-900 hover:from-purple-800 hover:to-indigo-800 text-purple-200 border border-purple-500/50 rounded-xl text-xs font-mono font-bold shadow-lg transition-all flex items-center gap-3 mx-auto">
-                    <i class="fa-solid fa-brain text-purple-400 text-base"></i> 🧠 Pon a Prueba tus Conocimientos (Dificultad Media Aleatoria)
-                </button>
             </div>
         </div>
     </div>
 
-    <!-- ================= PANTALLA EXPLICATIVA FULLSCREEN CON PYBOT (3 PANTALLAS) ================= -->
-    <div id="screen-explanation" class="screen-step items-center justify-center bg-slate-950 p-6 pt-16">
-        <div class="max-w-4xl w-full cyber-card p-6 rounded-2xl space-y-4 relative border border-cyan-500/40">
+    <!-- ================= PANTALLA EXPLICATIVA CON ESTILO LIMA / MORADO ================= -->
+    <div id="screen-explanation" class="screen-step items-center justify-center bg-[#CCFF00] p-10">
+        <div class="max-w-6xl w-full bg-[#0b0f19] text-slate-100 p-12 rounded-3xl space-y-8 relative border-4 border-purple-600 shadow-[0_20px_50px_rgba(124,58,237,0.3)]">
             
-            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+            <!-- Cabecera de la ventana -->
+            <div class="flex justify-between items-center border-b border-purple-900 pb-3">
                 <div class="flex items-center gap-2">
-                    <span class="w-3 h-3 rounded-full bg-cyan-400 animate-pulse"></span>
-                    <span class="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider">Fase de Explicación con PyBot (Tutor Interactivo)</span>
+                    <span class="w-3 h-3 rounded-full bg-[#CCFF00] animate-pulse"></span>
+                    <span class="text-sm font-mono text-[#CCFF00] font-bold uppercase tracking-wider">Fase de Explicación con PyBot (Tutor Interactivo)</span>
                 </div>
-                <span id="exp-badge" class="text-xs font-mono text-slate-300 bg-slate-900 px-3 py-1 rounded border border-slate-800">Pantalla 1 de 3</span>
+                <span id="exp-badge" class="text-xs font-mono text-purple-300 bg-purple-950/80 px-3 py-1 rounded-full border border-purple-700">Pantalla 1 de 5</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-start bg-slate-950/80 p-4 rounded-xl border border-slate-800">
-                <div class="md:col-span-3 flex flex-col items-center justify-center p-2">
-                    <div class="w-24 h-24 relative animate-pybot">
-                        <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-[0_0_12px_rgba(6,182,212,0.6)]">
-                            <rect x="25" y="40" width="50" height="40" rx="10" fill="#0F172A" stroke="#06B6D4" stroke-width="3"/>
-                            <rect x="32" y="47" width="36" height="24" rx="5" fill="#080C14" stroke="#10B981" stroke-width="2"/>
-                            <circle cx="42" cy="59" r="3.5" fill="#06B6D4" class="animate-pulse"/>
-                            <circle cx="58" cy="59" r="3.5" fill="#06B6D4" class="animate-pulse"/>
-                            <line x1="50" y1="40" x2="50" y2="25" stroke="#06B6D4" stroke-width="3"/>
-                            <circle cx="50" cy="22" r="4" fill="#F59E0B" class="animate-ping"/>
+            <!-- Contenido principal con PyBot y la burbuja de diálogo -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-[#121826] p-5 rounded-2xl border-2 border-purple-500/60 shadow-inner">
+                <!-- Avatar de PyBot -->
+                <div class="md:col-span-3 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-purple-900/50 pb-4 md:pb-0 md:pr-4">
+                    <div class="w-26 h-26 relative animate-pybot">
+                        <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-[0_0_12px_rgba(204,255,0,0.7)]">
+                            <rect x="25" y="40" width="50" height="40" rx="10" fill="#0b0f19" stroke="#CCFF00" stroke-width="3"/>
+                            <rect x="32" y="47" width="36" height="24" rx="5" fill="#080C14" stroke="#7C3AED" stroke-width="2"/>
+                            <circle cx="42" cy="59" r="3.5" fill="#CCFF00" class="animate-pulse"/>
+                            <circle cx="58" cy="59" r="3.5" fill="#CCFF00" class="animate-pulse"/>
+                            <line x1="50" y1="40" x2="50" y2="25" stroke="#CCFF00" stroke-width="3"/>
+                            <circle cx="50" cy="22" r="4" fill="#7C3AED" class="animate-ping"/>
                         </svg>
                     </div>
-                    <span class="text-xs font-mono font-bold text-cyan-400 mt-2">PyBot v2.4</span>
+                    <span class="text-xs font-mono font-bold text-[#CCFF00] mt-2">PyBot v2.4</span>
                     <span class="text-[10px] text-slate-400">Asistente de Ingeniería</span>
                 </div>
 
-                <div class="md:col-span-9 speech-bubble p-4 text-xs text-slate-200 leading-relaxed space-y-3" id="exp-content">
+                <!-- Cuadro de texto explicativo (burbuja con borde morado) -->
+                <div class="md:col-span-9 text-base text-slate-200 leading-relaxed space-y-3 border-2 border-purple-500/60 p-4 rounded-xl bg-[#0b0f19]" id="exp-content">
                     <!-- Dinámico -->
                 </div>
             </div>
 
-            <div class="flex justify-between items-center pt-2 border-t border-slate-800">
-                <button onclick="prevExpPage()" id="btn-exp-prev" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-mono rounded-lg border border-slate-700 transition-all">
+            <!-- Botones de navegación inferiores -->
+            <div class="flex justify-between items-center pt-2 border-t border-purple-900">
+                <button onclick="prevExpPage()" id="btn-exp-prev" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-purple-300 text-xs font-mono rounded-xl border border-purple-700 transition-all">
                     <i class="fa-solid fa-chevron-left"></i> Anterior
                 </button>
-                <button onclick="nextExpPage()" id="btn-exp-next" class="px-5 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs font-mono rounded-lg transition-all flex items-center gap-2">
+                <button onclick="nextExpPage()" id="btn-exp-next" class="px-6 py-3 bg-[#CCFF00] hover:bg-[#b3e600] text-slate-950 font-extrabold text-xs font-mono rounded-xl transition-all shadow-lg flex items-center gap-2">
                     Siguiente Pantalla <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- ================= PANTALLA FULLSCREEN PARA CADA EJERCICIO (CON PYBOT GRANDE EN EL TABLERO) ================= -->
-    <div id="screen-exercise" class="screen-step items-center justify-center bg-slate-950 p-6 pt-16">
-        <div class="max-w-4xl w-full cyber-card p-6 rounded-2xl space-y-4 relative border border-cyan-500/50">
+    <!-- ================= PANTALLA DE EJERCICIOS Y PREGUNTAS CON ESTILO LIMA / MORADO ================= -->
+    <div id="screen-exercise" class="screen-step items-center justify-center bg-[#CCFF00] p-6">
+        <div class="max-w-6xl w-full bg-[#0b0f19] text-slate-100 p-12 rounded-3xl space-y-6 relative border-4 border-purple-600 shadow-[0_20px_50px_rgba(124,58,237,0.3)]">
             
-            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                <span id="ex-counter" class="text-xs font-mono text-yellow-400 bg-yellow-950/80 px-3 py-1 rounded border border-yellow-800">Ejercicio 1 de 7</span>
-                <span id="ex-type-badge" class="text-xs font-mono text-cyan-300 bg-cyan-950 px-3 py-1 rounded border border-cyan-800">Actividad Práctica</span>
+            <div class="flex justify-between items-center border-b border-purple-900 pb-3">
+                <span id="ex-counter" class="text-xs font-mono text-[#CCFF00] bg-purple-950 px-3 py-1 rounded-full border border-purple-700">Ejercicio 1 de 7</span>
+                <span id="ex-type-badge" class="text-sm font-mono text-purple-300 bg-purple-950/80 px-3 py-1 rounded-full border border-purple-700">Actividad Práctica</span>
             </div>
 
-            <!-- Tablero de Preguntas con PyBot de Tamaño Grande Integrado -->
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-slate-950/90 p-5 rounded-2xl border border-cyan-500/30">
+            <!-- Tablero de Preguntas -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-[#121826] p-5 rounded-2xl border-2 border-purple-500/60 shadow-inner">
                 
-                <!-- Avatar de PyBot de tamaño grande a la izquierda -->
-                <div class="md:col-span-4 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-slate-800 pb-4 md:pb-0 md:pr-4">
-                    <div class="w-36 h-36 relative animate-pybot">
-                        <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-[0_0_20px_rgba(6,182,212,0.8)]">
-                            <rect x="25" y="40" width="50" height="40" rx="10" fill="#0F172A" stroke="#06B6D4" stroke-width="3"/>
-                            <rect x="32" y="47" width="36" height="24" rx="5" fill="#080C14" stroke="#10B981" stroke-width="2"/>
-                            <circle cx="42" cy="59" r="3.5" fill="#06B6D4" class="animate-pulse"/>
-                            <circle cx="58" cy="59" r="3.5" fill="#06B6D4" class="animate-pulse"/>
-                            <line x1="50" y1="40" x2="50" y2="25" stroke="#06B6D4" stroke-width="3"/>
-                            <circle cx="50" cy="22" r="4" fill="#F59E0B" class="animate-ping"/>
-                            <path d="M 20 50 Q 12 55 18 65" fill="none" stroke="#06B6D4" stroke-width="3" stroke-linecap="round"/>
-                            <path d="M 80 50 Q 88 55 82 65" fill="none" stroke="#06B6D4" stroke-width="3" stroke-linecap="round"/>
+                <!-- Avatar de PyBot grande -->
+                <div class="md:col-span-4 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-purple-900/50 pb-4 md:pb-0 md:pr-4">
+                    <div class="w-32 h-32 relative animate-pybot">
+                        <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-[0_0_20px_rgba(204,255,0,0.8)]">
+                            <rect x="25" y="40" width="50" height="40" rx="10" fill="#0b0f19" stroke="#CCFF00" stroke-width="3"/>
+                            <rect x="32" y="47" width="36" height="24" rx="5" fill="#080C14" stroke="#7C3AED" stroke-width="2"/>
+                            <circle cx="42" cy="59" r="3.5" fill="#CCFF00" class="animate-pulse"/>
+                            <circle cx="58" cy="59" r="3.5" fill="#CCFF00" class="animate-pulse"/>
+                            <line x1="50" y1="40" x2="50" y2="25" stroke="#CCFF00" stroke-width="3"/>
+                            <circle cx="50" cy="22" r="4" fill="#7C3AED" class="animate-ping"/>
+                            <path d="M 20 50 Q 12 55 18 65" fill="none" stroke="#CCFF00" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M 80 50 Q 88 55 82 65" fill="none" stroke="#CCFF00" stroke-width="3" stroke-linecap="round"/>
                         </svg>
                     </div>
-                    <span class="text-xs font-mono font-bold text-cyan-400 mt-2">PyBot Tutor</span>
+                    <span class="text-sm font-mono font-bold text-[#CCFF00] mt-2">PyBot Tutor</span>
                     <span class="text-[10px] text-slate-400">Analizando tu respuesta...</span>
                 </div>
 
-                <!-- Pregunta y Opciones en el panel derecho -->
+                <!-- Pregunta y Opciones -->
                 <div class="md:col-span-8 space-y-4">
-                    <div id="ex-body" class="space-y-3">
-                        <!-- Inyectado dinámicamente -->
-                    </div>
+                    <div id="ex-body" class="space-y-3"></div>
                 </div>
-
             </div>
 
             <!-- Feedback de respuesta -->
-            <div id="ex-feedback" class="hidden text-xs p-3 rounded-xl border transition-all"></div>
+            <div id="ex-feedback" class="hidden text-sm p-3 rounded-xl border transition-all"></div>
 
-            <div class="flex justify-between items-center pt-2">
-                <button onclick="prevExercise()" id="btn-ex-prev" class="px-4 py-2 bg-slate-900 text-slate-400 text-xs font-mono rounded-lg border border-slate-800">
+            <div class="flex justify-between items-center pt-2 border-t border-purple-900">
+                <button onclick="prevExercise()" id="btn-ex-prev" class="px-4 py-2 bg-slate-900 text-purple-300 text-sm font-mono rounded-xl border border-purple-700">
                     <i class="fa-solid fa-chevron-left"></i> Anterior
                 </button>
-                <button onclick="nextExercise()" id="btn-ex-next" class="px-5 py-2 bg-cyan-500 text-black font-bold text-xs font-mono rounded-lg">
+                <button onclick="nextExercise()" id="btn-ex-next" class="px-6 py-3 bg-[#CCFF00] hover:bg-[#b3e600] text-slate-950 font-extrabold text-xs font-mono rounded-xl transition-all shadow-lg flex items-center gap-2">
                     Siguiente Ejercicio <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
