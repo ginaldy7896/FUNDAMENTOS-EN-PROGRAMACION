@@ -16,6 +16,27 @@ function goToMenu() {
 }
 
 // 5 PANTALLAS EXPLICATIVAS PARA VARIABLES (CON EL VIDEO DE YOUTUBE CORREGIDO)
+const mediumExamBank = [
+    {
+        question: "¿Qué tipo de dato asigna Python automáticamente a la variable <code class='text-cyan-300'>nivel_acceso = 3.5</code>?",
+        options: ["A) int", "B) str", "C) bool", "D) float"],
+        correct: 3,
+        explanation: "Al tener un punto decimal, Python lo interpreta como float."
+    },
+    {
+        question: "¿Cuál es el operador lógico que devuelve True únicamente si ambas condiciones evaluadas son verdaderas?",
+        options: ["A) or", "B) and", "C) not", "D) is"],
+        correct: 1,
+        explanation: "and exige que todas las condiciones se cumplan."
+    },
+    {
+        question: "Siguiendo la precedencia de operadores, ¿cuál es el resultado de <code class='text-purple-300 font-mono'>resultado = 2 + 3 * 4</code>?",
+        options: ["A) 20", "B) 14", "C) 24", "D) 9"],
+        correct: 1,
+        explanation: "La multiplicación tiene prioridad (3 * 4 = 12), luego se suma 2 (14)."
+    }
+];
+
 const explanationPages = {
     1: [
         {
@@ -168,13 +189,13 @@ const explanationPages = {
             badge: "Pantalla 1 de 5 | El Procesamiento",
             html: `
                 <p class="font-bold text-emerald-300">3. EL PROCESAMIENTO Y SALIDA (LA LÓGICA EN ACCIÓN) 🚀</p>
-                <p class="text-sm text-slate-300 mb-1">El <strong>procesamiento</strong> ocurre cuando tomas tus variables y aplicas una secuencia de operadores para transformar los datos de entrada en nuevos resultados[cite: 18].</p>
-                <p class="text-sm text-slate-300 mb-1">Para que sea exitoso, debemos entender el <strong>orden de precedencia</strong>[cite: 18]:</p>
+                <p class="text-sm text-slate-300 mb-1">El <strong>procesamiento</strong> ocurre cuando tomas tus variables y aplicas una secuencia de operadores para transformar los datos de entrada en nuevos resultados.</p>
+                <p class="text-sm text-slate-300 mb-1">Para que sea exitoso, debemos entender el <strong>orden de precedencia</strong>:</p>
                 <ol class="list-decimal pl-4 space-y-0.5 text-sm text-slate-300 font-mono">
-                    <li>Paréntesis ()[cite: 18]</li>
-                    <li>Potencias **[cite: 18]</li>
-                    <li>Multiplicaciones, divisiones y módulos (*, /, //, %)[cite: 18]</li>
-                    <li>Sumas y restas (+, -)[cite: 18]</li>
+                    <li>Paréntesis ()</li>
+                    <li>Potencias **</li>
+                    <li>Multiplicaciones, divisiones y módulos (*, /, //, %)</li>
+                    <li>Sumas y restas (+, -)</li>
                 </ol>
             `
         },
@@ -182,26 +203,26 @@ const explanationPages = {
             badge: "Pantalla 2 de 5 | Ejemplo de Procesamiento",
             html: `
                 <p class="font-bold text-emerald-300">Procesamiento Paso a Paso 💻</p>
-                <p class="text-sm text-slate-300 mb-1">Ejemplo calculando el costo final de una compra en tienda de videojuegos[cite: 18]:</p>
+                <p class="text-sm text-slate-300 mb-1">Ejemplo calculando el costo final de una compra en tienda de videojuegos:</p>
                 <div class="bg-slate-900 p-2 rounded font-mono text-sm text-emerald-300 space-y-0.5">
                     <p>precio_juego = 60.0</p>
                     <p>monto_descuento = precio_juego * 0.20</p>
                     <p>precio_con_desc = precio_juego - monto_descuento</p>
                     <p>precio_final = precio_con_desc + (precio_con_desc * 0.05)</p>
                 </div>
-                <p class="text-sm text-slate-300 mt-1">Transformamos datos simples usando operadores aritméticos en secuencia lógica[cite: 20].</p>
+                <p class="text-sm text-slate-300 mt-1">Transformamos datos simples usando operadores aritméticos en secuencia lógica.</p>
             `
         },
         {
             badge: "Pantalla 3 de 5 | Salida de Resultados",
             html: `
                 <p class="font-bold text-emerald-300">Salida: Mostrando el Resultado 🖥️</p>
-                <p class="text-sm text-slate-300 mb-1">De nada sirve que la computadora calcule perfecto si el usuario no lo ve. La <strong>salida (output)</strong> comunica la información al exterior[cite: 21]:</p>
+                <p class="text-sm text-slate-300 mb-1">De nada sirve que la computadora calcule perfecto si el usuario no lo ve. La <strong>salida (output)</strong> comunica la información al exterior:</p>
                 <div class="bg-slate-900 p-2 rounded font-mono text-sm text-emerald-300 space-y-0.5">
                     <p>print("El valor total a pagar es:")</p>
                     <p>print(total_con_descuento)</p>
                 </div>
-                <p class="text-sm text-slate-300 mt-1">En Python la función universal para esto es <code class="text-emerald-300">print()</code>[cite: 21].</p>
+                <p class="text-sm text-slate-300 mt-1">En Python la función universal para esto es <code class="text-emerald-300">print()</code>.</p>
             `
         },
         {
@@ -299,55 +320,55 @@ const exercisesBank = {
         question: "¿Qué operador aritmético se utiliza para obtener el <b>residuo o módulo</b> de una división?",
         options: ["A) /", "B) //", "C) %", "D) **"],
         correct: 2, // C
-        explanation: "El símbolo % calcula el resto de una división entera. El / divide normal, // da división entera y ** calcula potencias[cite: 6]."
+        explanation: "El símbolo % calcula el resto de una división entera. El / divide normal, // da división entera y ** calcula potencias."
     },
     {
         question: "¿Cuál es el operador lógico que devuelve True únicamente si <b>ambas</b> condiciones evaluadas son verdaderas?",
         options: ["A) or", "B) and", "C) not", "D) is"],
         correct: 1, // B
-        explanation: "and exige que todas las condiciones se cumplan para arrojar verdadero; or requiere que al menos una lo haga[cite: 7]."
+        explanation: "and exige que todas las condiciones se cumplan para arrojar verdadero; or requiere que al menos una lo haga."
     },
     {
         question: "Relaciona la operación <code class='text-purple-300'>10 // 3</code> con su resultado numérico exacto:",
         options: ["A) 3.33", "B) 3", "C) 1"],
         correct: 1, // B
-        explanation: "La división entera (//) descarta los decimales, dejando solo la parte entera del cociente[cite: 8]."
+        explanation: "La división entera (//) descarta los decimales, dejando solo la parte entera del cociente."
     },
     {
         question: "Relaciona el operador <code class='text-purple-300'>!=</code> con su significado:",
         options: ["A) Igual a", "B) Mayor o igual que", "C) Diferente de"],
         correct: 2, // C
-        explanation: "El operador != significa 'Diferente de'[cite: 8]."
+        explanation: "El operador != significa 'Diferente de'."
     },
     {
         question: "Si queremos evaluar si una variable <code class='text-cyan-300'>edad</code> es estrictamente mayor a 18, utilizamos el operador de comparación ______.",
         options: ["A) >", "B) <", "C) ==", "D) !="],
         correct: 0, // A
-        explanation: "Se utiliza el operador mayor que (>), por ejemplo: edad > 18[cite: 8]."
+        explanation: "Se utiliza el operador mayor que (>), por ejemplo: edad > 18."
     },
     {
         question: "Para elevar un número a una potencia (por ejemplo, dos al cubo), el operador aritmético adecuado es ______.",
         options: ["A) ^", "B) *", "C) **", "D) //"],
         correct: 2, // C
-        explanation: "El operador aritmético para potencias es **, por ejemplo: 2 ** 3 da como resultado 8[cite: 9]."
+        explanation: "El operador aritmético para potencias es **, por ejemplo: 2 ** 3 da como resultado 8."
     },
     {
         question: "Identifica el error en la siguiente comparación: <code class='text-red-400 font-mono'>es_mayor = edad = 18</code>",
         options: ["A) Falta comillas en 18", "B) Se usa = en lugar de ==", "C) es_mayor no está declarada"],
         correct: 1, // B
-        explanation: "Se está usando el operador = (asignación) en lugar de == (comparación). Corrección: es_mayor = edad == 18[cite: 9]."
+        explanation: "Se está usando el operador = (asignación) en lugar de == (comparación). Corrección: es_mayor = edad == 18."
     },
     {
         question: "Completa el operador lógico faltante para que la condición sea verdadera solo si se cumplen ambos requisitos: <code class='text-cyan-300 font-mono'>puede_pasar = tiene_llave ______ nivel_alto</code>",
         options: ["A) or", "B) and", "C) not", "D) in"],
         correct: 1, // B
-        explanation: "El operador lógico correcto es and[cite: 9]."
+        explanation: "El operador lógico correcto es and."
     },
     {
         question: "¿Cuál es el resultado de la siguiente operación? <br><div class='bg-slate-900 p-2 rounded font-mono text-cyan-300 mt-1'>x = 10 % 3<br>print(x)</div>",
         options: ["A) 1", "B) 3", "C) 10", "D) 0"],
         correct: 0, // A
-        explanation: "10 dividido entre 3 da 3 (con un total de 9), por lo tanto el residuo (módulo) sobrante es 1[cite: 10]."
+        explanation: "10 dividido entre 3 da 3 (con un total de 9), por lo tanto el residuo (módulo) sobrante es 1."
     }
 ],
 3: [ // Ejercicios oficiales para Procesamiento y Salida
@@ -360,7 +381,7 @@ const exercisesBank = {
                 "C) Aplicar operadores -> Mostrar resultado -> Definir variables"
             ],
             correct: 1,
-            explanation: "El orden correcto es: 1. Definir variables con datos iniciales, 2. Aplicar operadores para procesar los datos, 3. Mostrar el resultado en pantalla (Salida)[cite: 11]."
+            explanation: "El orden correcto es: 1. Definir variables con datos iniciales, 2. Aplicar operadores para procesar los datos, 3. Mostrar el resultado en pantalla (Salida)."
         },
         {
             title: "Ejercicio 1.2 (Sencillo)",
@@ -371,13 +392,13 @@ const exercisesBank = {
                 "C) Asignar variable -> Multiplicar por 2 -> Resolver paréntesis"
             ],
             correct: 1,
-            explanation: "El orden de ejecución es: 1. Resolver la suma dentro del paréntesis (5 + 3 = 8), 2. Multiplicar por 2 (8 * 2 = 16), 3. Asignar el valor final a la variable total[cite: 12]."
+            explanation: "El orden de ejecución es: 1. Resolver la suma dentro del paréntesis (5 + 3 = 8), 2. Multiplicar por 2 (8 * 2 = 16), 3. Asignar el valor final a la variable total."
         },
         {
             title: "Ejercicio 3.1 (Medio)",
             question: "El proceso mediante el cual convertimos una idea lógica en un conjunto de órdenes que la máquina ejecuta se denomina escritura de ______.",
             correctValue: "instrucciones",
-            explanation: "Se denomina escritura de instrucciones (o código)[cite: 13]."
+            explanation: "Se denomina escritura de instrucciones (o código)."
         },
         {
             title: "Ejercicio 4.1 (Medio)",
@@ -388,7 +409,7 @@ const exercisesBank = {
                 "C) Calcular -> Declarar -> Imprimir -> Sumar"
             ],
             correct: 1,
-            explanation: "El orden correcto es: 1. Declarar la variable puntos_base = 100 y nivel = 3, 2. Calcular los puntos extra multiplicando nivel por 10, 3. Sumar puntos_base con los puntos extra en puntuacion_final, 4. Imprimir el valor actualizado de puntuacion_final[cite: 14]."
+            explanation: "El orden correcto es: 1. Declarar la variable puntos_base = 100 y nivel = 3, 2. Calcular los puntos extra multiplicando nivel por 10, 3. Sumar puntos_base con los puntos extra en puntuacion_final, 4. Imprimir el valor actualizado de puntuacion_final."
         },
         {
             title: "Ejercicio 4.2 (Medio)",
@@ -399,7 +420,7 @@ const exercisesBank = {
                 "C) Potencias ** -> Paréntesis () -> Operadores aritméticos (*, /, +, -)"
             ],
             correct: 1,
-            explanation: "La jerarquía es: 1. Paréntesis (), 2. Potencias **, 3. Operadores aritméticos (*, /, +, -)[cite: 15]."
+            explanation: "La jerarquía es: 1. Paréntesis (), 2. Potencias **, 3. Operadores aritméticos (*, /, +, -)."
         },
         {
             title: "Ejercicio 1.1 (Medio)",
@@ -410,13 +431,13 @@ const exercisesBank = {
                 "C) Evaluar una condición lógica"
             ],
             correct: 1,
-            explanation: "La función print() tiene como función principal mostrar la salida en pantalla[cite: 16]."
+            explanation: "La función print() tiene como función principal mostrar la salida en pantalla."
         },
         {
             title: "Ejercicio 2.1 (Sencillo)",
             question: "Para mostrar un mensaje en la pantalla al usuario, se utiliza la función incorporada llamada ______.",
             correctValue: "print",
-            explanation: "Se utiliza la función print (Ejemplo: print('Hola mundo'))[cite: 16]."
+            explanation: "Se utiliza la función print (Ejemplo: print('Hola mundo'))."
         },
         {
             title: "Ejercicio 3.1 (Medio)",
@@ -427,7 +448,7 @@ const exercisesBank = {
                 "C) Guardar archivo -> Crear variable -> Escribir print"
             ],
             correct: 1,
-            explanation: "El orden correcto es: 1. Crear la variable mensaje = 'Bienvenido', 2. Escribir print(mensaje), 3. Guardar el archivo con extensión .py[cite: 17]."
+            explanation: "El orden correcto es: 1. Crear la variable mensaje = 'Bienvenido', 2. Escribir print(mensaje), 3. Guardar el archivo con extensión .py."
         }
     ]
 };
@@ -478,6 +499,7 @@ function prevExpPage() {
 
 function startExercises() {
     currentExIndex = 0;
+    document.getElementById('btn-ex-next').onclick = nextExercise;
     showScreen('screen-exercise');
     renderExercise();
 }
@@ -487,11 +509,12 @@ function renderExercise() {
     const ex = currentBank[currentExIndex];
 
     document.getElementById('ex-counter').innerText = `Ejercicio ${currentExIndex + 1} de ${currentBank.length}`;
-    document.getElementById('ex-type-badge').innerText = ex.title;
+    document.getElementById('ex-type-badge').innerText = "Actividad práctica";
 
     const body = document.getElementById('ex-body');
     const feedback = document.getElementById('ex-feedback');
     feedback.classList.add('hidden');
+    delete feedback.dataset.answered;
 
     let html = `<p class="text-sm font-semibold text-white">${ex.question}</p>`;
 
@@ -523,6 +546,8 @@ function renderExercise() {
 
 function checkExOption(selected, correct, explanation) {
     const feedback = document.getElementById('ex-feedback');
+    if (feedback.dataset.answered) return;
+    feedback.dataset.answered = '1';
     feedback.classList.remove('hidden');
     if (selected === correct) {
         feedback.className = "text-xs p-3 rounded-xl border bg-emerald-950/65 border-emerald-500/60 text-emerald-200";
@@ -538,6 +563,8 @@ function checkExOption(selected, correct, explanation) {
 function checkExInput(correctVal, explanation) {
     const val = document.getElementById('ex-input-val').value.trim().toLowerCase();
     const feedback = document.getElementById('ex-feedback');
+    if (feedback.dataset.answered) return;
+    feedback.dataset.answered = '1';
     feedback.classList.remove('hidden');
 
     if (val === correctVal.toLowerCase()) {
@@ -582,6 +609,7 @@ function startExamMode() {
 
     document.getElementById('ex-body').innerHTML = html;
     document.getElementById('ex-feedback').classList.add('hidden');
+    delete document.getElementById('ex-feedback').dataset.answered;
     document.getElementById('btn-ex-prev').style.visibility = 'hidden';
     document.getElementById('btn-ex-next').innerHTML = `Siguiente Pregunta Media <i class="fa-solid fa-shuffle"></i>`;
     document.getElementById('btn-ex-next').onclick = startExamMode;
