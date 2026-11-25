@@ -37,6 +37,35 @@ const mediumExamBank = [
     }
 ];
 
+// ---------------------------------------------------------------
+// Video de YouTube con respaldo.
+// YouTube da "Error 153" cuando la pagina se abre con file:// (doble clic al
+// HTML) porque no recibe Referer. En ese caso mostramos una miniatura que abre
+// el video en YouTube. Con http(s):// (Live Server, hosting) se usa el iframe.
+// ---------------------------------------------------------------
+function youtubeEmbed(id, title) {
+    const frameClasses = "aspect-video max-w-md rounded-lg overflow-hidden border border-slate-800 bg-black my-2";
+    if (location.protocol === "file:") {
+        return `
+            <a href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener"
+               class="${frameClasses} relative block group" title="${title}">
+                <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="${title}" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition">
+                <span class="absolute inset-0 flex flex-col items-center justify-center gap-1 text-white text-sm font-bold">
+                    <i class="fa-brands fa-youtube text-red-500 text-5xl drop-shadow"></i>
+                    Ver en YouTube
+                </span>
+            </a>`;
+    }
+    return `
+        <div class="${frameClasses}">
+            <iframe class="w-full h-full"
+                src="https://www.youtube.com/embed/${id}?rel=0&playsinline=1"
+                title="${title}" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>`;
+}
+
 const explanationPages = {
     1: [
         {
@@ -95,17 +124,7 @@ const explanationPages = {
             badge: "Pantalla 5 de 5 | Video Explicativo de YouTube",
             html: `
                 <p class="font-bold text-cyan-300">Video Tutorial Oficial de PyBot 🎥</p>
-                <div class="aspect-video max-w-md rounded-lg overflow-hidden border border-slate-800 bg-black my-2">
-                    <iframe 
-                        class="w-full h-full" 
-                        src="https://www.youtube.com/embed/kZfuJvkdcHU" 
-                        title="Variables en Python" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin"
-                        allowfullscreen>
-                    </iframe>
-                </div>
+                ${youtubeEmbed("kZfuJvkdcHU", "Variables en Python")}
                 <div class="flex justify-between items-center text-[11px] text-slate-300 pt-1">
                     <span>¿No carga en vista local?</span>
                     <a href="https://youtu.be/kZfuJvkdcHU?si=rCjh5kXeAfSinH-r" target="_blank" class="text-cyan-400 underline hover:text-cyan-300 font-mono">
@@ -169,17 +188,7 @@ const explanationPages = {
             badge: "Pantalla 5 de 5 | Video Tutorial de Operadores",
             html: `
                 <p class="font-bold text-purple-300">Video Tutorial Oficial sobre Operadores 🎥</p>
-                <div class="aspect-video max-w-md rounded-lg overflow-hidden border border-slate-800 bg-black my-2">
-                    <iframe 
-                        class="w-full h-full" 
-                        src="https://www.youtube.com/embed/7U6_8o6PjIs" 
-                        title="Operadores en Python Shorts" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin"
-                        allowfullscreen>
-                    </iframe>
-                </div>
+                ${youtubeEmbed("7U6_8o6PjIs", "Operadores en Python Shorts")}
                 <p class="text-base text-slate-300">Has finalizado la teoría de operadores. Haz clic abajo para iniciar la práctica.</p>
             `
         }
@@ -244,17 +253,7 @@ const explanationPages = {
             badge: "Pantalla 5 de 5 | Video Explicativo",
             html: `
                 <p class="font-bold text-emerald-300">Video Tutorial Oficial de Procesamiento 🎥</p>
-                <div class="aspect-video max-w-md rounded-lg overflow-hidden border border-slate-800 bg-black my-2">
-                    <iframe 
-                        class="w-full h-full" 
-                        src="https://www.youtube.com/embed/HSy8d8FBXUU" 
-                        title="Procesamiento y Salida" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin"
-                        allowfullscreen>
-                    </iframe>
-                </div>
+                ${youtubeEmbed("HSy8d8FBXUU", "Procesamiento y Salida")}
                 <div class="flex justify-between items-center text-sm text-slate-300 pt-1">
                     <span>¿No carga en vista local?</span>
                     <a href="https://youtube.com/shorts/HSy8d8FBXUU?si=Jl-7AEe1fjX6lRLJ" target="_blank" class="text-emerald-400 underline hover:text-emerald-300 font-mono">
