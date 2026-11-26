@@ -471,11 +471,11 @@ function renderExpPage() {
     
     if (currentExpPage === pages.length - 1) {
         nextBtn.innerHTML = `¡Poner a prueba lo aprendido! <i class="fa-solid fa-rocket"></i>`;
-        nextBtn.className = "px-6 py-3 bg-[#CCFF00] hover:bg-[#b3e600] text-slate-950 font-extrabold text-xs font-mono rounded-xl transition-all shadow-lg";
+        nextBtn.className = "px-4 sm:px-6 py-3 bg-[#CCFF00] hover:bg-[#b3e600] text-slate-950 font-extrabold text-xs font-mono rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 ml-auto";
     } else {
         // AQUÍ SE CAMBIÓ EL ESTILO A VERDE LIMA (#CCFF00) CON TEXTO NEGRO (text-slate-950)
         nextBtn.innerHTML = `Siguiente Pantalla <i class="fa-solid fa-chevron-right"></i>`;
-        nextBtn.className = "px-6 py-3 bg-[#CCFF00] hover:bg-[#b3e600] text-slate-950 font-extrabold text-xs font-mono rounded-xl transition-all shadow-lg";
+        nextBtn.className = "px-4 sm:px-6 py-3 bg-[#CCFF00] hover:bg-[#b3e600] text-slate-950 font-extrabold text-xs font-mono rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 ml-auto";
     }
 }
 

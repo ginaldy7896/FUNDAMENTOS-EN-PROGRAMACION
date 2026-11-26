@@ -21,7 +21,7 @@
         }
     </script>
     <style>
-        body { background-color: #080C14; color: #F8FAFC; font-family: 'Inter', sans-serif; height: 100vh; overflow: hidden; }
+        body { background-color: #080C14; color: #F8FAFC; font-family: 'Inter', sans-serif; height: 100vh; height: 100dvh; overflow: hidden; }
         .code-font { font-family: 'Fira Code', monospace; }
         .cyber-card { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(16px); border: 1px solid #1E293B; box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.8); }
         
@@ -44,8 +44,12 @@
         }
         @keyframes pybot-float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
         .animate-pybot { animation: pybot-float 3.5s ease-in-out infinite; }
-        .screen-step { display: none; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 10; }
+        .screen-step { display: none; width: 100%; height: 100vh; height: 100dvh; position: fixed; top: 0; left: 0; z-index: 10;
+            overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch;
+            align-items: flex-start !important; padding-top: 4.75rem !important; padding-bottom: 1.5rem !important; }
         .screen-step.active { display: flex; }
+        /* La tarjeta se centra si cabe y hace scroll si no cabe */
+        .screen-step > * { margin: auto; min-width: 0; }
 
         .bg-pybot {
     background-color: #1a0b3d;
@@ -78,25 +82,52 @@ header .text-cyan-300,header .text-cyan-400{color:#CCFF00!important}
         linear-gradient(225deg, rgba(124, 58, 237, 0.45) 0%, transparent 40%),
         repeating-linear-gradient(60deg, transparent 0 58px, rgba(168, 85, 247, 0.12) 58px 60px) !important;
 }
+
+/* ===== Contenido dinámico: que nunca se salga de la pantalla ===== */
+#exp-content, #ex-body { overflow-wrap: anywhere; min-width: 0; }
+#exp-content .flex { flex-wrap: wrap; gap: .25rem .75rem; }
+#exp-content code, #exp-content .font-mono { overflow-wrap: anywhere; word-break: break-word; }
+#exp-content iframe, #exp-content img { max-width: 100%; }
+#exp-content .aspect-video { width: 100%; }
+
+/* ===== Móvil ===== */
+@media (max-width: 640px) {
+    .screen-step { padding-left: .75rem !important; padding-right: .75rem !important; padding-top: 4.25rem !important; }
+    header { padding-left: .75rem !important; padding-right: .75rem !important; }
+    header .space-x-4 > * { margin-left: 0 !important; }
+    header .space-x-4 { gap: .5rem; }
+    #screen-explanation #exp-content { font-size: .875rem; }
+    #ex-body input { font-size: 16px; } /* evita el zoom automático de iOS */
+    #ex-body button, #btn-exp-prev, #btn-exp-next, #btn-ex-prev, #btn-ex-next { min-height: 44px; }
+    .screen-step .grid > div[onclick] { padding: 1rem !important; }
+}
+@media (max-width: 420px) {
+    header h1 span { display: none; }
+}
+/* Teléfono en horizontal: poca altura */
+@media (max-height: 480px) and (orientation: landscape) {
+    .screen-step { padding-top: 3.75rem !important; }
+    .animate-pybot { animation: none; }
+}
     </style>
 </head>
 <body class="h-full w-full relative selection:bg-cyan-500 selection:text-black">
 
 
     <!-- HEADER GLOBAL -->
-    <header class="fixed top-0 left-0 w-full z-40 bg-[#120a2a]/90 backdrop-blur-md border-b border-purple-700 px-6 py-3 flex justify-between items-center">
-      <div class="flex items-center space-x-3 cursor-pointer" onclick="showScreen('screen-welcome')">
+    <header class="fixed top-0 left-0 w-full z-40 bg-[#120a2a]/90 backdrop-blur-md border-b border-purple-700 px-4 sm:px-6 py-2 sm:py-3 flex justify-between items-center gap-2">
+      <div class="flex items-center space-x-2 sm:space-x-3 cursor-pointer min-w-0" onclick="showScreen('screen-welcome')">
             <div class="bg-gradient-to-tr from-cyan-500 to-emerald-500 p-2 rounded-xl text-black font-extrabold text-lg flex items-center justify-center w-9 h-9">
                 <i class="fa-solid fa-microchip text-slate-950"></i>
             </div>
-            <h1 class="font-extrabold text-base bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
+            <h1 class="font-extrabold text-sm sm:text-base truncate bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
                 PyEngine <span class="text-[10px] px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 font-mono">PyBot Edition</span>
             </h1>
         </div>
 
-        <div class="flex items-center space-x-4">
-            <button onclick="showScreen('screen-modo')" class="text-xs bg-slate-900 hover:bg-slate-800 text-cyan-300 px-3 py-1.5 rounded-lg border border-cyan-800 font-mono transition-all flex items-center gap-2">
-    <i class="fa-solid fa-bars"></i> Menú de opciones
+        <div class="flex items-center space-x-2 sm:space-x-4 shrink-0">
+            <button onclick="showScreen('screen-modo')" aria-label="Menú de opciones" class="text-xs bg-slate-900 hover:bg-slate-800 text-cyan-300 px-3 py-1.5 rounded-lg border border-cyan-800 font-mono transition-all flex items-center gap-2">
+    <i class="fa-solid fa-bars"></i> <span class="hidden sm:inline">Menú de opciones</span>
 </button>
             <div class="flex items-center space-x-2 bg-slate-900 px-3 py-1.5 rounded-lg border border-yellow-500/30">
                 <i class="fa-solid fa-bolt text-yellow-400 text-xs"></i>
@@ -107,9 +138,9 @@ header .text-cyan-300,header .text-cyan-400{color:#CCFF00!important}
 
     <!-- ================= PANTALLA 1: BIENVENIDA CON PYBOT (FULLSCREEN) ================= -->
     <div id="screen-welcome" class="screen-step active items-center justify-center bg-pybot p-6 text-slate-900">
-        <div class="bg-[#0b0f19] text-slate-100 max-w-5xl w-full p-12 rounded-3xl space-y-6 text-center relative border-4 border-[#CCFF00] shadow-[0_20px_50px_rgba(124,58,237,0.3)]">
+        <div class="bg-[#0b0f19] text-slate-100 max-w-5xl w-full p-5 sm:p-8 md:p-12 rounded-3xl space-y-5 sm:space-y-6 text-center relative border-4 border-[#CCFF00] shadow-[0_20px_50px_rgba(124,58,237,0.3)]">
             <div class="flex justify-center">
-                <div class="w-32 h-32 relative animate-pybot">
+                <div class="w-24 h-24 sm:w-32 sm:h-32 relative animate-pybot">
                     <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-[0_0_15px_rgba(204,255,0,0.8)]">
                         <rect x="25" y="40" width="50" height="40" rx="10" fill="#0b0f19" stroke="#CCFF00" stroke-width="3"/>
                         <rect x="32" y="47" width="36" height="24" rx="5" fill="#080C14" stroke="#7C3AED" stroke-width="2"/>
@@ -122,13 +153,13 @@ header .text-cyan-300,header .text-cyan-400{color:#CCFF00!important}
             </div>
 
             <div class="space-y-2">
-                <span class="text-xs font-mono text-purple-300 uppercase tracking-widest bg-purple-950/80 px-3 py-1 rounded-full border border-purple-700">
+                <span class="inline-block text-[10px] sm:text-xs font-mono text-purple-300 uppercase tracking-wider sm:tracking-widest bg-purple-950/80 px-3 py-1 rounded-full border border-purple-700">
                     PyBot v2.4 | Asistente Virtual
                 </span>
-                <h2 class="text-3xl font-extrabold text-[#CCFF00]">¡Hola, Futuro Ingeniero! Soy PyBot. 🤖⚡</h2>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-[#CCFF00]">¡Hola, Futuro Ingeniero! Soy PyBot. 🤖⚡</h2>
             </div>
 
-            <div class="bg-[#121826] border-2 border-purple-500/60 p-5 rounded-2xl text-left text-sm text-slate-200 leading-relaxed space-y-3 shadow-inner">
+            <div class="bg-[#121826] border-2 border-purple-500/60 p-4 sm:p-5 rounded-2xl text-left text-sm text-slate-200 leading-relaxed space-y-3 shadow-inner">
                 <p>Hoy vamos a dar un paso fundamental en tu camino como programador: aprenderemos cómo una idea lógica que tienes en tu mente se transforma en instrucciones reales que Python puede entender y ejecutar.</p>
                 <p>Imagina que quieres resolver un problema cotidiano mediante software. Para lograrlo, debemos traducir esa lógica paso a paso utilizando variables, operadores, procesamiento y salida.</p>
             </div>
@@ -140,14 +171,14 @@ header .text-cyan-300,header .text-cyan-400{color:#CCFF00!important}
     </div>
 
             <!-- ================= PANTALLA 1.5: ELEGIR MODO ================= -->
-    <div id="screen-modo" class="screen-step items-center justify-center bg-pybot p-6 pt-20">
-    <div class="max-w-4xl w-full bg-[#0b0f19] p-10 rounded-3xl border-4 border-[#CCFF00] shadow-[0_20px_50px_rgba(124,58,237,0.3)] space-y-8 text-center">
+    <div id="screen-modo" class="screen-step items-center justify-center bg-pybot p-6">
+    <div class="max-w-4xl w-full bg-[#0b0f19] p-5 sm:p-8 md:p-10 rounded-3xl border-4 border-[#CCFF00] shadow-[0_20px_50px_rgba(124,58,237,0.3)] space-y-8 text-center">
         <div>
-            <h2 class="text-3xl font-extrabold text-[#CCFF00]">¿Cómo quieres practicar?</h2>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-[#CCFF00]">¿Cómo quieres practicar?</h2>
             <p class="text-slate-300 text-xs mt-2 font-mono">Elige la forma en que PyBot te acompañará hoy:</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <!-- Opción: ejercicios autocorregibles -->
             <div onclick="showScreen('screen-menu')" class="cursor-pointer bg-[#CCFF00] hover:bg-[#b8e600] text-slate-950 p-6 rounded-2xl border-4 border-purple-600 shadow-[0_10px_30px_rgba(124,58,237,0.25)] transition-all hover:-translate-y-1.5 text-left space-y-4">
                 <div class="w-12 h-12 rounded-xl bg-slate-950 text-[#CCFF00] flex items-center justify-center text-lg border-2 border-purple-600">
@@ -175,10 +206,10 @@ header .text-cyan-300,header .text-cyan-400{color:#CCFF00!important}
 
     <!-- ================= PANTALLA 2: ¿QUÉ QUIERES APRENDER HOY? ================= -->
   <div id="screen-menu" class="screen-step items-center justify-center bg-pybot p-6">
-        <div class="max-w-5xl w-full space-y-8">
+        <div class="max-w-5xl w-full space-y-6 sm:space-y-8">
             <div class="flex flex-col items-center text-center space-y-2">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 animate-pybot">
+                <div class="flex items-center justify-center gap-3">
+                    <div class="w-10 h-10 shrink-0 animate-pybot">
                         <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-[0_0_8px_rgba(204,255,0,0.6)]">
                             <rect x="20" y="30" width="60" height="45" rx="12" fill="#0b0f19" stroke="#CCFF00" stroke-width="5"/>
                             <rect x="30" y="40" width="40" height="25" rx="6" fill="#080C14" stroke="#7C3AED" stroke-width="3"/>
@@ -186,12 +217,12 @@ header .text-cyan-300,header .text-cyan-400{color:#CCFF00!important}
                             <circle cx="58" cy="52" r="4" fill="#CCFF00"/>
                         </svg>
                     </div>
-                    <h2 class="text-5xl font-extrabold text-[#CCFF00] tracking-tight">¿Qué quieres aprender hoy?</h2>
+                    <h2 class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-[#CCFF00] tracking-tight text-left sm:text-center">¿Qué quieres aprender hoy?</h2>
                 </div>
                 <p class="text-xs text-slate-300 font-mono">PyBot te guiará paso a paso por los siguientes módulos de ingeniería:</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
                 
                 <!-- TARJETA 1: VARIABLES -->
                 <div onclick="startTopic(1)" class="cursor-pointer bg-[#CCFF00] hover:bg-[#b8e600] text-slate-950 p-6 rounded-2xl border-4 border-purple-600 shadow-[0_10px_30px_rgba(124,58,237,0.25)] transition-all hover:-translate-y-1.5 flex flex-col justify-between space-y-5">
@@ -242,23 +273,23 @@ header .text-cyan-300,header .text-cyan-400{color:#CCFF00!important}
     </div>
 
     <!-- ================= PANTALLA EXPLICATIVA CON ESTILO LIMA / MORADO ================= -->
-<div id="screen-explanation" class="screen-step items-center justify-center bg-pybot p-10">
-        <div class="max-w-6xl w-full bg-[#0b0f19] text-slate-100 p-12 rounded-3xl space-y-8 relative border-4 border-purple-600 shadow-[0_20px_50px_rgba(124,58,237,0.3)]">
+<div id="screen-explanation" class="screen-step items-center justify-center bg-pybot p-6">
+        <div class="max-w-6xl w-full bg-[#0b0f19] text-slate-100 p-4 sm:p-8 md:p-12 rounded-3xl space-y-5 sm:space-y-8 relative border-4 border-purple-600 shadow-[0_20px_50px_rgba(124,58,237,0.3)]">
             
             <!-- Cabecera de la ventana -->
-            <div class="flex justify-between items-center border-b border-purple-900 pb-3">
+            <div class="flex flex-wrap justify-between items-center gap-2 border-b border-purple-900 pb-3">
                 <div class="flex items-center gap-2">
                     <span class="w-3 h-3 rounded-full bg-[#CCFF00] animate-pulse"></span>
-                    <span class="text-sm font-mono text-[#CCFF00] font-bold uppercase tracking-wider">Fase de Explicación con PyBot (Tutor Interactivo)</span>
+                    <span class="text-xs sm:text-sm font-mono text-[#CCFF00] font-bold uppercase tracking-wide sm:tracking-wider">Fase de Explicación con PyBot (Tutor Interactivo)</span>
                 </div>
                 <span id="exp-badge" class="text-xs font-mono text-purple-300 bg-purple-950/80 px-3 py-1 rounded-full border border-purple-700">Pantalla 1 de 5</span>
             </div>
 
             <!-- Contenido principal con PyBot y la burbuja de diálogo -->
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-[#121826] p-5 rounded-2xl border-2 border-purple-500/60 shadow-inner">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 items-center bg-[#121826] p-3 sm:p-5 rounded-2xl border-2 border-purple-500/60 shadow-inner">
                 <!-- Avatar de PyBot -->
                 <div class="md:col-span-3 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-purple-900/50 pb-4 md:pb-0 md:pr-4">
-                    <div class="w-26 h-26 relative animate-pybot">
+                    <div class="w-20 h-20 md:w-24 md:h-24 relative animate-pybot">
                         <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-[0_0_12px_rgba(204,255,0,0.7)]">
                             <rect x="25" y="40" width="50" height="40" rx="10" fill="#0b0f19" stroke="#CCFF00" stroke-width="3"/>
                             <rect x="32" y="47" width="36" height="24" rx="5" fill="#080C14" stroke="#7C3AED" stroke-width="2"/>
@@ -273,17 +304,17 @@ header .text-cyan-300,header .text-cyan-400{color:#CCFF00!important}
                 </div>
 
                 <!-- Cuadro de texto explicativo (burbuja con borde morado) -->
-                <div class="md:col-span-9 text-base text-slate-200 leading-relaxed space-y-3 border-2 border-purple-500/60 p-4 rounded-xl bg-[#0b0f19]" id="exp-content">
+                <div class="md:col-span-9 text-base text-slate-200 leading-relaxed space-y-3 border-2 border-purple-500/60 p-3 sm:p-4 rounded-xl bg-[#0b0f19]" id="exp-content">
                     <!-- Dinámico -->
                 </div>
             </div>
 
             <!-- Botones de navegación inferiores -->
-            <div class="flex justify-between items-center pt-2 border-t border-purple-900">
+            <div class="flex flex-wrap justify-between items-center gap-3 pt-3 border-t border-purple-900">
                 <button onclick="prevExpPage()" id="btn-exp-prev" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-purple-300 text-xs font-mono rounded-xl border border-purple-700 transition-all">
                     <i class="fa-solid fa-chevron-left"></i> Anterior
                 </button>
-                <button onclick="nextExpPage()" id="btn-exp-next" class="px-6 py-3 bg-[#CCFF00] hover:bg-[#b3e600] text-slate-950 font-extrabold text-xs font-mono rounded-xl transition-all shadow-lg flex items-center gap-2">
+                <button onclick="nextExpPage()" id="btn-exp-next" class="px-4 sm:px-6 py-3 bg-[#CCFF00] hover:bg-[#b3e600] text-slate-950 font-extrabold text-xs font-mono rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 ml-auto">
                     Siguiente Pantalla <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
@@ -292,19 +323,19 @@ header .text-cyan-300,header .text-cyan-400{color:#CCFF00!important}
 
     <!-- ================= PANTALLA DE EJERCICIOS Y PREGUNTAS CON ESTILO LIMA / MORADO ================= -->
  <div id="screen-exercise" class="screen-step items-center justify-center bg-pybot p-6">
-        <div class="max-w-6xl w-full bg-[#0b0f19] text-slate-100 p-12 rounded-3xl space-y-6 relative border-4 border-purple-600 shadow-[0_20px_50px_rgba(124,58,237,0.3)]">
+        <div class="max-w-6xl w-full bg-[#0b0f19] text-slate-100 p-4 sm:p-8 md:p-12 rounded-3xl space-y-4 sm:space-y-6 relative border-4 border-purple-600 shadow-[0_20px_50px_rgba(124,58,237,0.3)]">
             
-            <div class="flex justify-between items-center border-b border-purple-900 pb-3">
+            <div class="flex flex-wrap justify-between items-center gap-2 border-b border-purple-900 pb-3">
                 <span id="ex-counter" class="text-xs font-mono text-[#CCFF00] bg-purple-950 px-3 py-1 rounded-full border border-purple-700">Ejercicio 1 de 7</span>
                 <span id="ex-type-badge" class="text-sm font-mono text-purple-300 bg-purple-950/80 px-3 py-1 rounded-full border border-purple-700">Actividad Práctica</span>
             </div>
 
             <!-- Tablero de Preguntas -->
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-[#121826] p-5 rounded-2xl border-2 border-purple-500/60 shadow-inner">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 items-center bg-[#121826] p-3 sm:p-5 rounded-2xl border-2 border-purple-500/60 shadow-inner">
                 
                 <!-- Avatar de PyBot grande -->
                 <div class="md:col-span-4 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-purple-900/50 pb-4 md:pb-0 md:pr-4">
-                    <div class="w-32 h-32 relative animate-pybot">
+                    <div class="w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 relative animate-pybot">
                         <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-[0_0_20px_rgba(204,255,0,0.8)]">
                             <rect x="25" y="40" width="50" height="40" rx="10" fill="#0b0f19" stroke="#CCFF00" stroke-width="3"/>
                             <rect x="32" y="47" width="36" height="24" rx="5" fill="#080C14" stroke="#7C3AED" stroke-width="2"/>
@@ -329,11 +360,11 @@ header .text-cyan-300,header .text-cyan-400{color:#CCFF00!important}
             <!-- Feedback de respuesta -->
             <div id="ex-feedback" class="hidden text-sm p-3 rounded-xl border transition-all"></div>
 
-            <div class="flex justify-between items-center pt-2 border-t border-purple-900">
+            <div class="flex flex-wrap justify-between items-center gap-3 pt-3 border-t border-purple-900">
                 <button onclick="prevExercise()" id="btn-ex-prev" class="px-4 py-2 bg-slate-900 text-purple-300 text-sm font-mono rounded-xl border border-purple-700">
                     <i class="fa-solid fa-chevron-left"></i> Anterior
                 </button>
-                <button onclick="nextExercise()" id="btn-ex-next" class="px-6 py-3 bg-[#CCFF00] hover:bg-[#b3e600] text-slate-950 font-extrabold text-xs font-mono rounded-xl transition-all shadow-lg flex items-center gap-2">
+                <button onclick="nextExercise()" id="btn-ex-next" class="px-4 sm:px-6 py-3 bg-[#CCFF00] hover:bg-[#b3e600] text-slate-950 font-extrabold text-xs font-mono rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 ml-auto">
                     Siguiente Ejercicio <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
